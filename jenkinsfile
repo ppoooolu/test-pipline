@@ -1,4 +1,5 @@
 pipeline {
+    properties([disableConcurrentBuilds()])
     agent any
 
     stages {
