@@ -7,5 +7,10 @@ pipeline {
                 echo 'xxxxxxxxxxx'
             }
         }
+        stage('Stream job eoore') {
+            steps {
+                sh('cd /aaaaa')
+            }
+        }
     }
 }
