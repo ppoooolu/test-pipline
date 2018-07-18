@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Next Job') {
             steps {
-                build "test_multibranch2/master", parameters: [[$class: 'LabelParameterValue',name: 'NODE_NAME',value: 'label1']]
+                build job: "test_multibranch2/master", parameters: [[$class: 'LabelParameterValue',name: 'NODE_NAME',value: 'label1']]
             }
         }
     }
