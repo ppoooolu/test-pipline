@@ -30,9 +30,8 @@ pipeline {
                       $class: 'StringParameterValue',
                       name: 'someStringParameter',
                       value: 'some string value',
-                    ],
-                  ],
-
+                    ]
+                  ]
             }
         }
     }
