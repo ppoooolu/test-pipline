@@ -17,5 +17,10 @@ pipeline {
                 echo 'qopper pr1 Deploying....'
             }
         }
+        stage('Next Job') {
+            steps {
+                echo 'qopper pr1 Deploying....'
+            }
+        }
     }
 }
