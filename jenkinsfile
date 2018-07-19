@@ -19,6 +19,7 @@ pipeline {
         }
         stage('Next Job') {
             steps {
+                def result
                 result = build job: 'test_multibranch2/master',
                   parameters: [
                     [
@@ -33,6 +34,7 @@ pipeline {
                     ]
                   ],
                   propagate: false
+                println result.result
             }
         }
     }
