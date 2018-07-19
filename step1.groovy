@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
+    }
+//    environment {
+//        job_id = 'xxxxxxxx'
+//    }
     stages {
         stage('Build') {
             steps {
@@ -18,7 +24,7 @@ pipeline {
         }
         stage('Next Job') {
             steps {
-                def _result = rebuild job: 'test_multibranch2/master',
+                build job: 'test_multibranch2/master',
                         parameters: [
                             [
                                     $class: 'BooleanParameterValue',
