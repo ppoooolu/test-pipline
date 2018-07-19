@@ -11,6 +11,7 @@ pipeline {
 //            parallel {
                 stage('Next Job 1') {
                     steps {
+                        FileHelp('test call')
                         build job: 'test_multibranch2/master',
                                 parameters: [
                                         [
@@ -21,7 +22,6 @@ pipeline {
                                 ]
 //                        ,
 //                                propagate: false
-                        FileHelp('test call')
                     }
 
                 }
