@@ -27,14 +27,9 @@ pipeline {
                 build job: 'test_multibranch2/master',
                         parameters: [
                             [
-                                    $class: 'BooleanParameterValue',
-                                    name: 'someBooleanParameter',
-                                    value: true,
-                            ],
-                            [
                                     $class: 'StringParameterValue',
-                                    name: 'someStringParameter',
-                                    value: 'some string value',
+                                    name: 'job_id',
+                                    value: ${params.job_id},
                             ]
                         ],
                         propagate: false
