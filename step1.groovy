@@ -29,7 +29,7 @@ pipeline {
                             [
                                     $class: 'StringParameterValue',
                                     name: 'job_id',
-                                    value: ${params.job_id},
+                                    value: params.job_id,
                             ]
                         ],
                         propagate: false
