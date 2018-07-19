@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Stream job') {
             steps {
-                echo 'xxxxxxxxxxx'
+                echo 'pppppp'
             }
         }
         stage('Stream job eoore') {
