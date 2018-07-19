@@ -7,22 +7,7 @@ pipeline {
 //        job_id = 'xxxxxxxx'
 //    }
     stages {
-//        stage('Build') {
-//            steps {
-//                echo 'qopper pr1 Building..'
-//            }
-//        }
-//        stage('Test') {
-//            steps {
-//                echo 'qopper pr1 Testing..'
-//            }
-//        }
-//        stage('Deploy') {
-//            steps {
-//                echo 'qopper pr1 Deploying....'
-//            }
-//        }
-        stage('Run Tests') {
+//        stage('Run Tests') {
 //            parallel {
                 stage('Next Job 1') {
                     steps {
@@ -53,6 +38,6 @@ pipeline {
                     }
                 }
 //            }
-        }
+//        }
     }
 }
