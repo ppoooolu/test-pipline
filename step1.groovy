@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    def _result
     stages {
         stage('Build') {
             steps {
@@ -19,19 +19,18 @@ pipeline {
         }
         stage('Next Job') {
             steps {
-                def _result
                 _result = rebuild job: 'test_multibranch2/master',
                         parameters: [
-                                [
-                                        $class: 'BooleanParameterValue',
-                                        name: 'someBooleanParameter',
-                                        value: true,
-                                ],
-                                [
-                                        $class: 'StringParameterValue',
-                                        name: 'someStringParameter',
-                                        value: 'some string value',
-                                ]
+                            [
+                                    $class: 'BooleanParameterValue',
+                                    name: 'someBooleanParameter',
+                                    value: true,
+                            ],
+                            [
+                                    $class: 'StringParameterValue',
+                                    name: 'someStringParameter',
+                                    value: 'some string value',
+                            ]
                         ],
                         propagate: false
 
