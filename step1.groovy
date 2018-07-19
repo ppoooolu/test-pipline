@@ -21,9 +21,9 @@ pipeline {
                                 ]
 //                        ,
 //                                propagate: false
-
+                        FileHelp('test call')
                     }
-                    FileHelp('test call')
+
                 }
                 stage('Next Job 2') {
                     steps {
