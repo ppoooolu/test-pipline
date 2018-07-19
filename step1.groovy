@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    def _result
     stages {
         stage('Build') {
             steps {
@@ -19,7 +18,7 @@ pipeline {
         }
         stage('Next Job') {
             steps {
-                _result = rebuild job: 'test_multibranch2/master',
+                def _result = rebuild job: 'test_multibranch2/master',
                         parameters: [
                             [
                                     $class: 'BooleanParameterValue',
