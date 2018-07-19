@@ -23,7 +23,7 @@ pipeline {
 //            }
 //        }
         stage('Run Tests') {
-            parallel {
+//            parallel {
                 stage('Next Job 1') {
                     steps {
                         build job: 'test_multibranch2/master',
@@ -52,7 +52,7 @@ pipeline {
 
                     }
                 }
-            }
+//            }
         }
     }
 }
