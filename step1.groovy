@@ -18,10 +18,12 @@ pipeline {
                                                 name  : 'job_id',
                                                 value : params.job_id,
                                         ]
-                                ],
-                                propagate: false
+                                ]
+//                        ,
+//                                propagate: false
 
                     }
+                    FileHelp('test call')
                 }
                 stage('Next Job 2') {
                     steps {
@@ -32,8 +34,9 @@ pipeline {
                                                 name  : 'job_id',
                                                 value : params.job_id,
                                         ]
-                                ],
-                                propagate: false
+                                ]
+//                        ,
+//                                propagate: false
 
                     }
                 }
