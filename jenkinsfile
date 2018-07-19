@@ -19,21 +19,22 @@ pipeline {
         }
         stage('Next Job') {
             steps {
-                def result = build job: 'test_multibranch2/master',
-                  parameters: [
-                    [
-                      $class: 'BooleanParameterValue',
-                      name: 'someBooleanParameter',
-                      value: true,
-                    ],
-                    [
-                      $class: 'StringParameterValue',
-                      name: 'someStringParameter',
-                      value: 'some string value',
-                    ]
-                  ],
-                  propagate: false
-                println result.result
+                def result = build(
+                      'test_multibranch2/master',
+                      parameters: [
+                        [
+                          $class: 'BooleanParameterValue',
+                          name: 'someBooleanParameter',
+                          value: true,
+                        ],
+                        [
+                          $class: 'StringParameterValue',
+                          name: 'someStringParameter',
+                          value: 'some string value',
+                        ]
+                      ],
+                      propagate: false
+                  )
             }
         }
     }
