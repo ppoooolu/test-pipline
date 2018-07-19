@@ -19,7 +19,8 @@ pipeline {
         }
         stage('Next Job') {
             steps {
-                build job: 'test_multibranch2/master',
+                def _result
+                _result = rebuild job: 'test_multibranch2/master',
                         parameters: [
                                 [
                                         $class: 'BooleanParameterValue',
