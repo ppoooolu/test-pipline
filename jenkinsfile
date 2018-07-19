@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Next Job') {
             steps {
-                build job: 'test_multibranch2/master',
+                result = build job: 'test_multibranch2/master',
                   parameters: [
                     [
                       $class: 'BooleanParameterValue',
@@ -31,7 +31,8 @@ pipeline {
                       name: 'someStringParameter',
                       value: 'some string value',
                     ]
-                  ]
+                  ],
+                  propagate: false
             }
         }
     }
