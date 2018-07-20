@@ -34,9 +34,8 @@ pipeline {
                                             name  : 'job_id',
                                             value : params.job_id,
                                         ]
-                                    ]
-//                              ,
-//                                propagate: false
+                                    ],
+                                propagate: false
 
                             printf(_result.result)
                         }
