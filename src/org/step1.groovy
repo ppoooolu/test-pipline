@@ -35,7 +35,7 @@ pipeline {
                                                 ]
                                         ]
                                 ]
-                                writeJSON(file: '/tmp/message1.json', json: data)
+                                writeJSON(file: 'message1.json', json: data)
                             }
                         }
                     }
