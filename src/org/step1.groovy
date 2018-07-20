@@ -28,7 +28,7 @@ pipeline {
                                 echo 'Write_Pipeline_Json failed!'
                                 def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
 //                                def json_file = readJSON file: '/tmp/jenkins_jobs/${params.job_id}_Pipeline'
-                                assert pipeline_json['Write_Pipeline_Json']['status'] == 'FAILED'
+                                assert pipeline_json['Write_Pipeline_Json'] == 'FAILED'
                                 writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
                                 error(e)
                             }
