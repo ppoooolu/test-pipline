@@ -37,7 +37,7 @@ pipeline {
                                     ],
                                 propagate: false
 
-                            echo _result.result
+                            echo "${_result.result}"
                         }
 
                     }
