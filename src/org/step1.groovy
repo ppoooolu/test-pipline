@@ -18,7 +18,8 @@ pipeline {
                         script{
                             script{
                                 def pipeline_json=[['stage':'Next Job 1','index':1],['stage':'Next Job 2','index':2]]
-                                writeJSON(file: '/tmp/message1.json', json: pipeline_json)
+                                def jsonOut = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
+                                writeJSON(file: '/tmp/message1.json', json: jsonOut)
                             }
                         }
                     }
