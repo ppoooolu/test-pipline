@@ -24,8 +24,8 @@ pipeline {
                         }
                 }
                 stage('Next Job 1') {
-//                    steps {
-//                        script{
+                    steps {
+                        script{
                             def _result = build job: 'test_multibranch2/master',
                                 parameters: [
                                         [
@@ -44,9 +44,9 @@ pipeline {
                                 throw ''
                             }
 
-//                        }
-//
-//                    }
+                        }
+
+                    }
 
                 }
                 stage('Next Job 2') {
