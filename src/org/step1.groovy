@@ -26,15 +26,13 @@ pipeline {
                                 }
                             }
                         }
-                            catch (exception e ) {
-                                def json_file = readJSON file: '/tmp/jenkins_jobs/${params.job_id}_Pipeline'
-                                assert json_file['Write_Pipeline_Json']['status'] == 'FAILED'
-                                error(e)
-                            }
+                        catch (exception e ) {
+                            def json_file = readJSON file: '/tmp/jenkins_jobs/${params.job_id}_Pipeline'
+                            assert json_file['Write_Pipeline_Json']['status'] == 'FAILED'
+                            error(e)
                         }
                     }
-
-
+        
 
                 stage('Next Job 1') {
                     steps {
