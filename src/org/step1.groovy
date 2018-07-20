@@ -40,6 +40,7 @@ pipeline {
                         }
                         catch (exception){
                             printf('Next Job 1 Failed')
+                            throw exception
                         }
                     }
 
