@@ -14,24 +14,25 @@ pipeline {
 //        stage('Run Tests') {
 //            parallel {
 
-                    stage('Write_Pipeline_Json') {
-                        try {
-                            steps {
-                                script {
-                                    //                                def pipeline_json=[["stage":"Next Job 1","index":1],["stage":"Next Job 2","index":2]]
-                                    def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
-                                    assert pipeline_json['Write_Pipeline_Json']['status'] == 'SUCCESS'
-                                    //                                def jsonOut = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
-                                    writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
-                                }
-                            }
-                        }
-                        catch (Exception e) {
-                            def json_file = readJSON file: '/tmp/jenkins_jobs/${params.job_id}_Pipeline'
-                            assert json_file['Write_Pipeline_Json']['status'] == 'FAILED'
-                            error(e)
+                stage('Write_Pipeline_Json') {
+                    steps {
+                        script {
+                            //                                def pipeline_json=[["stage":"Next Job 1","index":1],["stage":"Next Job 2","index":2]]
+                            def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
+                            assert pipeline_json['Write_Pipeline_Json']['status'] == 'SUCCESS'
+                            //                                def jsonOut = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
+                            writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
                         }
                     }
+                }
+
+                post {
+                    failure {
+                        echo 'Write_Pipeline_Json failed!'
+                        def json_file = readJSON file: '/tmp/jenkins_jobs/${params.job_id}_Pipeline'
+                        assert json_file['Write_Pipeline_Json']['status'] == 'FAILED'
+                    }
+                }
 
 
                 stage('Next Job 1') {
