@@ -20,7 +20,7 @@ pipeline {
                             try {
                                 //def pipeline_json=[["stage":"Next Job 1","index":1],["stage":"Next Job 2","index":2]]
                                 def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
-                                assert pipeline_json['Write_Pipeline_Json']['status'] == 'SUCCESS'
+                                assert pipeline_json['Write_Pipeline_Json'] == 'SUCCESS'
                                 //def jsonOut = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                                 writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
                             }
