@@ -19,23 +19,28 @@ pipeline {
 //                                def pipeline_json=[["stage":"Next Job 1","index":1],["stage":"Next Job 2","index":2]]
                                 def pipeline_json=readJSON file: '/tmp/Pipeline_Template'
 //                                def jsonOut = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
-                                writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}Pipeline", json: pipeline_json)
+                                writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
                             }
                         }
                 }
                 stage('Next Job 1') {
                     steps {
 //                        FileHelp('test call')
-                        build job: 'test_multibranch2/master',
-                                parameters: [
-                                        [
-                                                $class: 'StringParameterValue',
-                                                name  : 'job_id',
-                                                value : params.job_id,
-                                        ]
-                                ]
+                        try {
+                            build job: 'test_multibranch2/master',
+                                    parameters: [
+                                            [
+                                                    $class: 'StringParameterValue',
+                                                    name  : 'job_id',
+                                                    value : params.job_id,
+                                            ]
+                                    ]
 //                        ,
 //                                propagate: false
+                        }
+                        catch (exception){
+                            printf('Next Job 1 Failed')
+                        }
                     }
 
                 }
