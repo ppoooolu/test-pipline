@@ -41,7 +41,7 @@ pipeline {
                             }
                             else {
                                 echo "${_result.rawBuild.log}"
-                                throw ''
+                                error("Build failed Next Job 1")
                             }
 
                         }
