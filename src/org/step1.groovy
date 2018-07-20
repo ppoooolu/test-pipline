@@ -24,7 +24,7 @@ pipeline {
                                 //                                def jsonOut = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                                 writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
                             }
-                            catch (Expection e){
+                            catch (Exception e){
                                 echo 'Write_Pipeline_Json failed!'
                                 def json_file = readJSON file: '/tmp/jenkins_jobs/${params.job_id}_Pipeline'
                                 assert json_file['Write_Pipeline_Json']['status'] == 'FAILED'
