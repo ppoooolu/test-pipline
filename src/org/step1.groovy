@@ -36,8 +36,15 @@ pipeline {
                                         ]
                                     ],
                                 propagate: false
-
                             echo "${_result.result}"
+                            if (_result.result=="SUCCESS"){
+
+                            }
+                            else {
+                                echo "${_result.rawBuild.log}"
+                                throw ''
+                            }
+
                         }
 
                     }
