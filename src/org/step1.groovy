@@ -6,17 +6,26 @@ pipeline {
     parameters {
         string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
     }
-    def pipeline_json=[['stage':'Next Job 1','index':1],['stage':'Next Job 2','index':2]]
+
 //    environment {
 //        job_id = 'xxxxxxxx'
 //    }
     stages {
 //        stage('Run Tests') {
 //            parallel {
+                stage('Write_Pipeline_Json'){
+                    steps{
+                        script{
+                            script{
+                                def pipeline_json=[['stage':'Next Job 1','index':1],['stage':'Next Job 2','index':2]]
+                                writeJSON(file: '/tmp/message1.json', json: pipeline_json)
+                            }
+                        }
+                    }
+                }
                 stage('Next Job 1') {
                     steps {
 //                        FileHelp('test call')
-                        writeJSON(file: '/tmp/message1.json', json: pipeline_json)
                         build job: 'test_multibranch2/master',
                                 parameters: [
                                         [
