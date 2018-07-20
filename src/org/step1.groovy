@@ -1,10 +1,12 @@
 package org
+import groovy.json.JsonOutput
 
 pipeline {
     agent any
     parameters {
         string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
     }
+    def pipeline_json=[['stage':'Next Job 1','index':1],['stage':'Next Job 2','index':2]]
 //    environment {
 //        job_id = 'xxxxxxxx'
 //    }
@@ -13,7 +15,8 @@ pipeline {
 //            parallel {
                 stage('Next Job 1') {
                     steps {
-                        FileHelp('test call')
+//                        FileHelp('test call')
+                        writeJSON(file: '/tmp/message1.json', json: pipeline_json)
                         build job: 'test_multibranch2/master',
                                 parameters: [
                                         [
