@@ -27,22 +27,18 @@ pipeline {
                     steps {
 //                        FileHelp('test call')
                         script{
-                            try {
-                                build job: 'test_multibranch2/master',
-                                        parameters: [
-                                                [
-                                                        $class: 'StringParameterValue',
-                                                        name  : 'job_id',
-                                                        value : params.job_id,
-                                                ]
+                            def _result = build job: 'test_multibranch2/master',
+                                parameters: [
+                                        [
+                                            $class: 'StringParameterValue',
+                                            name  : 'job_id',
+                                            value : params.job_id,
                                         ]
+                                    ]
 //                              ,
 //                                propagate: false
-                            }
-                            catch (exception){
-                                printf('Next Job 1 Failed')
-                                throw exception
-                            }
+
+                            printf(_result.result)
                         }
 
                     }
