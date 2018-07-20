@@ -37,7 +37,7 @@ pipeline {
                                     ],
                                 propagate: false
 
-                            printf(_result.result)
+                            echo _result.result
                         }
 
                     }
