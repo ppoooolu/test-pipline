@@ -35,7 +35,7 @@ pipeline {
                                                 ]
                                         ]
                                 ]
-                                writeJSON(file: 'message1.json', json: JsonOutput.toJson(data))
+                                writeJSON(file: 'message1.json', json: data)
                             }
                         }
                     }
