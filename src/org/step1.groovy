@@ -1,8 +1,13 @@
 package org
 import groovy.json.JsonOutput
 
-def check_status(key1,key2){
-    return true
+def check_status(file,key1,key2){
+    if (!fileExists('file')) {return false}
+    def check_file_json = readJSON file: file
+    if (check_file_json[key1][key2] == 'SUCCESS'){
+        return true
+    }
+    return false
 }
 
 pipeline {
@@ -10,7 +15,7 @@ pipeline {
     parameters {
         string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
     }
-    
+
 //    environment {
 //        job_id = 'xxxxxxxx'
 //    }
@@ -21,6 +26,7 @@ pipeline {
                 stage('Write_Pipeline_Json') {
                     steps {
                         script {
+                            echo check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline","Write_Pipeline_Json","status")
                             try {
                                 //def pipeline_json=[["stage":"Next Job 1","index":1],["stage":"Next Job 2","index":2]]
                                 def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
@@ -37,6 +43,7 @@ pipeline {
                                 writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
                                 error(e)
                             }
+                            echo check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline","Write_Pipeline_Json","status")
                         }
                     }
                 }
