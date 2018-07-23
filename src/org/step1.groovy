@@ -1,16 +1,16 @@
 package org
 import groovy.json.JsonOutput
 
+def check_status(key1,key2){
+    return true
+}
+
 pipeline {
     agent any
     parameters {
         string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
     }
-
-    def check_status(key1,key2){
-        return true
-    }
-
+    
 //    environment {
 //        job_id = 'xxxxxxxx'
 //    }
