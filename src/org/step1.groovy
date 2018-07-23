@@ -36,7 +36,6 @@ pipeline {
                     steps {
                         script {
                             if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status")) {
-                                echo "${aa}"
                                 try {
                                     //def pipeline_json=[["stage":"Next Job 1","index":1],["stage":"Next Job 2","index":2]]
                                     def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
