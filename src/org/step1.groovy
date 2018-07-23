@@ -7,6 +7,10 @@ pipeline {
         string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
     }
 
+    def check_status(key1,key2){
+        return true
+    }
+
 //    environment {
 //        job_id = 'xxxxxxxx'
 //    }
@@ -18,17 +22,6 @@ pipeline {
                     steps {
                         script {
                             try {
-
-//                                def json = JsonOutput.toJson([name: 'John Doe', age: 42])
-//
-//                                assert json == '{"name":"John Doe","age":42}'
-//
-//                                assert JsonOutput.prettyPrint(json) == '''\
-//                                {
-//                                    "name": "John Doe",
-//                                    "age": 42
-//                                }'''.stripIndent()
-
                                 //def pipeline_json=[["stage":"Next Job 1","index":1],["stage":"Next Job 2","index":2]]
                                 def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
                                 pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
@@ -44,7 +37,6 @@ pipeline {
                                 writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
                                 error(e)
                             }
-
                         }
                     }
                 }
@@ -99,6 +91,7 @@ pipeline {
 
                     }
                 }
+
 //            }
 //        }
     }
