@@ -26,7 +26,8 @@ pipeline {
                 stage('Write_Pipeline_Json') {
                     steps {
                         script {
-                            echo check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline","Write_Pipeline_Json","status")
+                            def aa= check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline","Write_Pipeline_Json","status")
+                            echo "${aa}"
                             try {
                                 //def pipeline_json=[["stage":"Next Job 1","index":1],["stage":"Next Job 2","index":2]]
                                 def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
@@ -43,7 +44,8 @@ pipeline {
                                 writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
                                 error(e)
                             }
-                            echo check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline","Write_Pipeline_Json","status")
+                            def bb= check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline","Write_Pipeline_Json","status")
+                            echo "${bb}"
                         }
                     }
                 }
