@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Stream job eoore') {
             steps {
-                sh('cd /aaaaa')
+                sh('ls')
             }
         }
     }

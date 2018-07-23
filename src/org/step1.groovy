@@ -10,6 +10,14 @@ def check_status(file,key1,key2){
     }
     return false
 }
+def write_pipeline_file(_file,_key1,_key2,_value){
+//    if (!fileExists(_file)) {return false}
+    def write_file_json = readJSON file: _file
+    write_file_json[_key1][_key2]=_value
+    writeJSON(file: _file, json: write_file_json)
+    return true
+
+}
 
 pipeline {
     agent any
@@ -27,26 +35,28 @@ pipeline {
                 stage('Write_Pipeline_Json') {
                     steps {
                         script {
-                            def aa= check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline","Write_Pipeline_Json","status")
-                            echo "${aa}"
-                            try {
-                                //def pipeline_json=[["stage":"Next Job 1","index":1],["stage":"Next Job 2","index":2]]
-                                def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
-                                pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
-                                echo "${pipeline_json }"
-                                //def jsonOut = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
-                                writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
-                            }
-                            catch (Exception e){
-                                echo 'Write_Pipeline_Json failed!'
-                                def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
+                            if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status")) {
+                                echo "${aa}"
+                                try {
+                                    //def pipeline_json=[["stage":"Next Job 1","index":1],["stage":"Next Job 2","index":2]]
+                                    def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
+                                    pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
+                                    echo "${pipeline_json}"
+                                    //def jsonOut = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
+                                    writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
+                                }
+                                catch (Exception e) {
+                                    echo 'Write_Pipeline_Json failed!'
+                                    def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
 //                                def json_file = readJSON file: '/tmp/jenkins_jobs/${params.job_id}_Pipeline'
-                                pipeline_json.Write_Pipeline_Json.status = 'FAILED'
-                                writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
-                                error(e)
+                                    pipeline_json.Write_Pipeline_Json.status = 'FAILED'
+                                    writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
+                                    error(e)
+                                }
                             }
-                            def bb= check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline","Write_Pipeline_Json","status")
-                            echo "${bb}"
+                            else {
+                                echo "skip Write_Pipeline_Json"
+                            }
                         }
                     }
                 }
@@ -63,24 +73,28 @@ pipeline {
                 stage('Next Job 1') {
                     steps {
                         script{
-                            def _result = build job: 'test_multibranch2/master',
-                                parameters: [
-                                        [
-                                            $class: 'StringParameterValue',
-                                            name  : 'job_id',
-                                            value : params.job_id,
-                                        ]
-                                    ],
-                                propagate: false
-                            echo "${_result.result}"
-                            if (_result.result=="SUCCESS"){
-
+                            if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "'Next Job 1", "status")) {
+                                def _result = build job: 'test_multibranch2/master',
+                                        parameters: [
+                                                [
+                                                        $class: 'StringParameterValue',
+                                                        name  : 'job_id',
+                                                        value : params.job_id,
+                                                ]
+                                        ],
+                                        propagate: false
+                                echo "${_result.result}"
+                                if (_result.result == "SUCCESS") {
+                                    write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 1", "status", "SUCCESS")
+                                } else {
+                                    echo "${_result.rawBuild.log}"
+                                    write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 1", "status", _result.result)
+                                    error("Build failed Next Job 1")
+                                }
                             }
                             else {
-                                echo "${_result.rawBuild.log}"
-                                error("Build failed Next Job 1")
+                                echo "skip Next Job 1"
                             }
-
                         }
 
                     }
@@ -88,16 +102,29 @@ pipeline {
                 }
                 stage('Next Job 2') {
                     steps {
-                        build job: 'test_multibranch3/master',
-                                parameters: [
-                                        [
-                                                $class: 'StringParameterValue',
-                                                name  : 'job_id',
-                                                value : params.job_id,
-                                        ]
-                                ]
-//                        ,
-//                                propagate: false
+                        script {
+                            if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "'Next Job 2", "status")) {
+                                def _result = build job: 'test_multibranch3/master',
+                                        parameters: [
+                                                [
+                                                        $class: 'StringParameterValue',
+                                                        name  : 'job_id',
+                                                        value : params.job_id,
+                                                ]
+                                        ],
+                                        propagate: false
+                                if (_result.result == "SUCCESS") {
+                                    write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 2", "status", "SUCCESS")
+                                } else {
+                                    echo "${_result.rawBuild.log}"
+                                    write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 2", "status", _result.result)
+                                    error("Build failed Next Job 1")
+                                }
+                            }
+                            else {
+                                echo " skip Next Job 2"
+                            }
+                        }
 
                     }
                 }

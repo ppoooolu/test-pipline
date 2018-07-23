@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Stream job eoore') {
             steps {
-                sh('ls')
+                sh('cd /tmp/jenkins_jobs/test')
             }
         }
     }
