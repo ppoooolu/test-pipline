@@ -72,7 +72,7 @@ pipeline {
                 stage('Next Job 1') {
                     steps {
                         script{
-                            if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "'Next Job 1", "status")) {
+                            if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 1", "status")) {
                                 def _result = build job: 'test_multibranch2/master',
                                         parameters: [
                                                 [
@@ -102,7 +102,7 @@ pipeline {
                 stage('Next Job 2') {
                     steps {
                         script {
-                            if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "'Next Job 2", "status")) {
+                            if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 2", "status")) {
                                 def _result = build job: 'test_multibranch3/master',
                                         parameters: [
                                                 [
