@@ -1,5 +1,7 @@
 import groovy.json.JsonOutput
 
+import java.lang.reflect.Type
+
 def check_status(file,key1,key2){
     if (!fileExists(file)) {return false}
     def check_file_json = readJSON file: file
@@ -45,12 +47,9 @@ pipeline {
                             def pipeline_json_file = readJSON file: '/tmp/Pipeline_Template'
                             echo "${pipeline_json}"
                             echo "${pipeline_json_file}"
-                            if (pipeline_json==pipeline_json_file){
-                                echo 'aaaaaaaaaaa'
-                            }
 
                             pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
-
+                            pipeline_json=readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                             writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
                         }
                         catch (Exception e) {
