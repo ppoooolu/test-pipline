@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    kubernetes {
+        label 'test-label'
+    }
     parameters {
         string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
     }
@@ -12,7 +14,9 @@ pipeline {
         }
         stage('Stream job eoore') {
             steps {
-                sh('ls')
+                container('lcjenkins-java8') {
+                    sh 'java -version'
+                }
             }
         }
     }
