@@ -24,9 +24,9 @@ def write_pipeline_file(_file,_key1,_key2,_value){
 
 
 def pipeline_json = [
-        Write_Pipeline_Json:[index:1, status:nu],
-        Test_Step_1:[index:2, status:nu],
-        Test_Step_2:[index:3, status:nu]
+        Write_Pipeline_Json:[index:1, status:"nu"],
+        Test_Step_1:[index:2, status:"nu"],
+        Test_Step_2:[index:3, status:"nu"]
 ]
 
 pipeline {
