@@ -42,9 +42,9 @@ pipeline {
                 script {
                     if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status")) {
                         try {
-//                            def pipeline_json_file = readJSON file: '/tmp/Pipeline_Template'
-//                            echo "${pipeline_json}"
-//                            echo "${pipeline_json_file}"
+                            def pipeline_json_file = readJSON file: '/tmp/Pipeline_Template'
+                            echo "${pipeline_json}"
+                            echo "${pipeline_json_file}"
                             pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
 
                             writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
