@@ -45,6 +45,10 @@ pipeline {
                             def pipeline_json_file = readJSON file: '/tmp/Pipeline_Template'
                             echo "${pipeline_json}"
                             echo "${pipeline_json_file}"
+                            if (pipeline_json==pipeline_json_file){
+                                echo 'aaaaaaaaaaa'
+                            }
+
                             pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
 
                             writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
