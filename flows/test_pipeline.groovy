@@ -51,11 +51,11 @@ pipeline {
         }
 
 
-        stage('Next Job 1') {
+        stage('Test Step 1') {
             steps {
                 script{
-                    if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 1", "status")) {
-                        def _result = build job: 'test_multibranch2/master',
+                    if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test Step 1", "status")) {
+                        def _result = build job: 'test_step_1/master',
                                 parameters: [
                                         [
                                                 $class: 'StringParameterValue',
@@ -66,26 +66,26 @@ pipeline {
                                 propagate: false
                         echo "${_result.result}"
                         if (_result.result == "SUCCESS") {
-                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 1", "status", "SUCCESS")
+                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test Step 1", "status", "SUCCESS")
                         } else {
                             echo "${_result.rawBuild.log}"
-                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 1", "status", _result.result)
-                            error("Build failed Next Job 1")
+                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test Step 1", "status", _result.result)
+                            error("Build failed Test Step 1")
                         }
                     }
                     else {
-                        echo "skip Next Job 1"
+                        echo "skip Test Step 1"
                     }
                 }
 
             }
 
         }
-        stage('Next Job 2') {
+        stage('Test Step 2') {
             steps {
                 script {
-                    if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 2", "status")) {
-                        def _result = build job: 'test_multibranch3/master',
+                    if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test Step 2", "status")) {
+                        def _result = build job: 'test_step_2/master',
                                 parameters: [
                                         [
                                                 $class: 'StringParameterValue',
@@ -95,15 +95,15 @@ pipeline {
                                 ],
                                 propagate: false
                         if (_result.result == "SUCCESS") {
-                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 2", "status", "SUCCESS")
+                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test Step 2", "status", "SUCCESS")
                         } else {
                             echo "${_result.rawBuild.log}"
-                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Next Job 2", "status", _result.result)
-                            error("Build failed Next Job 1")
+                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test Step 2", "status", _result.result)
+                            error("Build failed Test Step 2")
                         }
                     }
                     else {
-                        echo " skip Next Job 2"
+                        echo " skip Test Step 2"
                     }
                 }
 
