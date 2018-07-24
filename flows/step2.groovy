@@ -1,7 +1,27 @@
 pipeline {
     agent {
         kubernetes {
-            label 'test-label'
+            label 'mypod'
+            defaultContainer 'jnlp'
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: maven
+    image: maven:3.3.9-jdk-8-alpine
+    command:
+    - cat
+    tty: true
+  - name: busybox
+    image: busybox
+    command:
+    - cat
+    tty: true
+"""
         }
     }
     parameters {
@@ -16,8 +36,8 @@ pipeline {
         }
         stage('Stream job eoore') {
             steps {
-                container('lcjenkins-java8') {
-                    sh 'java -version'
+                container('maven') {
+                    sh 'mvn -version'
                 }
             }
         }
