@@ -1,6 +1,8 @@
 pipeline {
-    kubernetes {
-        label 'test-label'
+    agent {
+        kubernetes {
+            label 'test-label'
+        }
     }
     parameters {
         string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
