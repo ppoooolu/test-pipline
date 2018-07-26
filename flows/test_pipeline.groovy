@@ -13,7 +13,9 @@ def check_status(file,key1,key2){
 }
 def write_pipeline_file(_file,_key1,_key2,_value){
     def write_file_json = readJSON file: _file
+    echo "${write_file_json}"
     write_file_json[_key1][_key2]=_value
+    echo "${write_file_json}"
     writeJSON(file: _file, json: write_file_json)
     return true
 }
