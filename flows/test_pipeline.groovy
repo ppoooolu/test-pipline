@@ -17,7 +17,7 @@ def write_pipeline_file(_file,_key1,_key2,_value){
     write_file_json[_key1][_key2]=_value
     echo "${write_file_json}"
     writeJSON(file: _file, json: write_file_json)
-    return true
+    return write_file_json
 }
 
 //def pipeline_json = JsonOutput.toJson([
@@ -83,11 +83,13 @@ pipeline {
                                 propagate: false
                         echo "${_result.result}"
                         if (_result.result == "SUCCESS") {
-                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_1", "status", "SUCCESS")
+                            def write_output = write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_1", "status", "SUCCESS")
+                            echo "${write_output}"
                         } else {
-                            echo "${_result.rawBuild.log}"
-                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_1", "status", _result.result)
-                            error("Build failed Test_Step_1")
+//                            echo "${_result.rawBuild.log}"
+                            def write_output = write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_1", "status", _result.result)
+                            echo "${write_output}"
+                            error("Build failed Test_Step_1\n${_result.rawBuild.log}")
                         }
                     }
                     else {
@@ -112,11 +114,13 @@ pipeline {
                                 ],
                                 propagate: false
                         if (_result.result == "SUCCESS") {
-                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_2", "status", "SUCCESS")
+                            def write_output = write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_2", "status", "SUCCESS")
+                            echo "${write_output}"
                         } else {
-                            echo "${_result.rawBuild.log}"
-                            write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_2", "status", _result.result)
-                            error("Build failed Test_Step_2")
+//                            echo "${_result.rawBuild.log}"
+                            def write_output = write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_2", "status", _result.result)
+                            echo "${write_output}"
+                            error("Build failed Test_Step_2\n${_result.rawBuild.log}")
                         }
                     }
                     else {
