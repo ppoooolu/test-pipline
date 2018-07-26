@@ -44,10 +44,7 @@ pipeline {
                 script {
                     if (!check_status("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status")) {
                         try {
-                            def pipeline_json_file = readJSON file: '/tmp/Pipeline_Template'
-                            echo "${pipeline_json}"
-                            echo "${pipeline_json_file}"
-
+//                            def pipeline_json_file = readJSON file: '/tmp/Pipeline_Template'
                             pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
                             pipeline_json=readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                             writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
@@ -56,6 +53,7 @@ pipeline {
                             echo 'Write_Pipeline_Json failed!'
 //                            def pipeline_json = readJSON file: '/tmp/Pipeline_Template'
                             pipeline_json.Write_Pipeline_Json.status = 'FAILED'
+                            pipeline_json=readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                             writeJSON(file: "/tmp/jenkins_jobs/${params.job_id}_Pipeline", json: pipeline_json)
                             error(e)
                         }
