@@ -84,11 +84,11 @@ pipeline {
                         echo "${_result.result}"
                         if (_result.result == "SUCCESS") {
                             def write_output = write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_1", "status", "SUCCESS")
-                            echo "${write_output}"
+//                            echo "${write_output}"
                         } else {
 //                            echo "${_result.rawBuild.log}"
                             def write_output = write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_1", "status", _result.result)
-                            echo "${write_output}"
+//                            echo "${write_output}"
                             error("Build failed Test_Step_1\n${_result.rawBuild.log}")
                         }
                     }
@@ -115,11 +115,11 @@ pipeline {
                                 propagate: false
                         if (_result.result == "SUCCESS") {
                             def write_output = write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_2", "status", "SUCCESS")
-                            echo "${write_output}"
+//                            echo "${write_output}"
                         } else {
 //                            echo "${_result.rawBuild.log}"
                             def write_output = write_pipeline_file("/tmp/jenkins_jobs/${params.job_id}_Pipeline", "Test_Step_2", "status", _result.result)
-                            echo "${write_output}"
+//                            echo "${write_output}"
                             error("Build failed Test_Step_2\n${_result.rawBuild.log}")
                         }
                     }
