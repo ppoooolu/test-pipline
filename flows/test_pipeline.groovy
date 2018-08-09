@@ -1,3 +1,4 @@
+@Library('test-cj')
 import groovy.json.JsonOutput
 
 import java.lang.reflect.Type
