@@ -1,7 +1,7 @@
 @Library('test-cj')
 import groovy.json.JsonOutput
-
 import java.lang.reflect.Type
+import com.mycorp.pipeline.test-cj.Fleet
 
 def check_status(file,key1,key2){
     if (!fileExists(file)) {return false}
@@ -45,6 +45,7 @@ pipeline {
         stage('Write_Pipeline_Json') {
             steps {
                 script {
+
                     if (!check_status("/tmp/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status")) {
                         try {
 //                            def pipeline_json_file = readJSON file: '/tmp/Pipeline_Template'
