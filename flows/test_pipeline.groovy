@@ -1,4 +1,4 @@
-@Library('test-cj')
+@Library('test-cj@1.0')
 import groovy.json.JsonOutput
 
 import java.lang.reflect.Type
