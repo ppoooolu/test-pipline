@@ -33,6 +33,8 @@ def pipeline_json = [
         Test_Step_2:[index:3, status:"nu"]
 ]
 
+def fleets_choice=Fleets.CHOICES
+
 pipeline {
     agent any
     parameters {
@@ -44,7 +46,7 @@ pipeline {
         stage('Write_Pipeline_Json') {
             steps {
                 script {
-
+                    echo "${fleets_choice}"
                     if (!check_status("/tmp/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status")) {
                         try {
 //                            def pipeline_json_file = readJSON file: '/tmp/Pipeline_Template'
