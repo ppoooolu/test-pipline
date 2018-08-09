@@ -33,7 +33,7 @@ def pipeline_json = [
         Test_Step_2:[index:3, status:"nu"]
 ]
 
-def fleets_choice=Fleets.CHOICES
+def fleets_choice=Fleet.Fleets.CHOICES
 
 pipeline {
     agent any
