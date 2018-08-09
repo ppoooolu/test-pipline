@@ -1,7 +1,6 @@
-@Library('test-cj')
+@Library('test-cj') import org.Fleet
 import groovy.json.JsonOutput
 import java.lang.reflect.Type
-import com.mycorp.pipeline.test-cj.Fleet
 
 def check_status(file,key1,key2){
     if (!fileExists(file)) {return false}
