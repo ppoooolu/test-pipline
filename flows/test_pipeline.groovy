@@ -68,7 +68,7 @@ pipeline {
                             writeJSON(file: "/tmp/${params.job_id}_Pipeline", json: pipeline_json)
 
                             parameters_json.parameters_A = "Write_A"
-                            writeJSON(file: "/tmp/${params.job_id}_Parameters", json: pipeline_json)
+                            writeJSON(file: "/tmp/${params.job_id}_Parameters", json: parameters_json)
 
                         }
                         catch (Exception e) {
