@@ -20,6 +20,12 @@ def write_pipeline_file(_file,_key1,_key2,_value){
     return write_file_json
 }
 
+def write_parameters_file(_file,key1,_value){
+    def write_file_json = readJSON file: _file
+    write_file_json[_key1]=_value
+    writeJSON(file: _file, json: write_file_json)
+    return write_file_json
+}
 //def pipeline_json = JsonOutput.toJson([
 //        "Write_Pipeline_Json":[index:0,status:"nu"],
 //        "Test_Step_1":[index:1,status:"nu"],
@@ -31,6 +37,12 @@ def pipeline_json = [
         Write_Pipeline_Json:[index:1, status:"nu"],
         Test_Step_1:[index:2, status:"nu"],
         Test_Step_2:[index:3, status:"nu"]
+]
+
+def parameters_json = [
+        parameters_A:"A",
+        parameters_B:"B",
+        parameters_C:"C"
 ]
 
 //def fleets_choice=Fleet.Fleets.CHOICES
@@ -54,6 +66,10 @@ pipeline {
                             pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
                             pipeline_json=readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                             writeJSON(file: "/tmp/${params.job_id}_Pipeline", json: pipeline_json)
+
+                            parameters_json.parameters_A = "Write_A"
+                            writeJSON(file: "/tmp/${params.job_id}_Parameters", json: pipeline_json)
+
                         }
                         catch (Exception e) {
                             echo 'Write_Pipeline_Json failed!'
