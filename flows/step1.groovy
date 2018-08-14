@@ -1,7 +1,7 @@
 import groovy.json.JsonOutput
 import java.lang.reflect.Type
 
-def write_parameters_file(_file,key1,_value) {
+def write_parameters_file(_file,_key1,_value) {
     def write_file_json = readJSON file: _file
     write_file_json[_key1] = _value
     writeJSON(file: _file, json: write_file_json)
