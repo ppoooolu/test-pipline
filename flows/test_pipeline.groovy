@@ -40,9 +40,9 @@ def pipeline_json = [
 ]
 
 def parameters_json = [
-        parameters_A:"A",
-        parameters_B:"B",
-        parameters_C:"C"
+        parameters_A: "A",
+        parameters_B: "B",
+        parameters_C: "C"
 ]
 
 //def fleets_choice=Fleet.Fleets.CHOICES
@@ -68,6 +68,7 @@ pipeline {
                             writeJSON(file: "/tmp/${params.job_id}_Pipeline", json: pipeline_json)
 
                             parameters_json.parameters_A = "Write_A"
+                            parameters_json=readJSON text: groovy.json.JsonOutput.toJson(parameters_json)
                             writeJSON(file: "/tmp/${params.job_id}_Parameters", json: parameters_json)
 
                         }
