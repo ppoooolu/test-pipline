@@ -17,14 +17,14 @@ pipeline {
     stages {
         stage('Stream job') {
             steps {
-                write_file_parameters_json = readJSON file: "${job_id}_Parameters"
+                write_file_parameters_json = readJSON file: "/tmp/${job_id}_Parameters"
                 echo '${write_file_parameters_json.parameters_A}'
             }
         }
         stage('Stream job eoore') {
             steps {
                 sh('ls')
-                write_parameters_file("${job_id}_Parameters","parameters_B","Write_B")
+                write_parameters_file("/tmp/${job_id}_Parameters","parameters_B","Write_B")
             }
         }
     }
