@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     write_file_parameters_json = readJSON file: "/tmp/${job_id}_Parameters"
-                    echo '${write_file_parameters_json.parameters_A}'
+                    echo "${write_file_parameters_json.parameters_A}"
                 }
             }
         }
