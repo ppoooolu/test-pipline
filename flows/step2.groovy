@@ -38,7 +38,7 @@ spec:
             steps {
                 container('maven') {
                     sh 'mvn -version'
-//                    sh 'cd /test_step2'
+                    sh 'cd /test_step2'
                 }
             }
         }
