@@ -23,7 +23,9 @@ def write_pipeline_file(_file,_key1,_key2,_value){
 
 def write_parameters_file(_file,key1,_value){
     def write_file_json = readJSON file: _file
+    echo "${write_file_json}"
     write_file_json[_key1]=_value
+    echo "${write_file_json}"
     writeJSON(file: _file, json: write_file_json)
     return write_file_json
 }
@@ -77,7 +79,6 @@ pipeline {
             }
         }
 
-
         stage('Test_Step_1') {
             steps {
                 script{
@@ -107,6 +108,7 @@ pipeline {
             }
 
         }
+
         stage('Test_Step_2') {
             steps {
                 script {

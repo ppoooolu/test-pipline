@@ -3,7 +3,9 @@ import java.lang.reflect.Type
 
 def write_parameters_file(_file,_key1,_value) {
     def write_file_json = readJSON file: _file
+    echo "${write_file_json}"
     write_file_json[_key1] = _value
+    echo "${write_file_json}"
     writeJSON(file: _file, json: write_file_json)
     return write_file_json
 }
