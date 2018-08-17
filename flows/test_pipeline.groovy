@@ -27,6 +27,7 @@ def write_parameters_file(_file,key1,_value){
     write_file_json[_key1]=_value
     echo "${write_file_json}"
     writeJSON(file: _file, json: write_file_json)
+    echo "${_file}"
     return write_file_json
 }
 

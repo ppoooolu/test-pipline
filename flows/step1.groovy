@@ -17,7 +17,7 @@ pipeline {
     }
 
     stages {
-        stage('Stream job') {
+        stage('Read Parameter File') {
             steps {
                 script {
                     write_file_parameters_json = readJSON file: "/tmp/${job_id}_Parameters"
@@ -25,7 +25,7 @@ pipeline {
                 }
             }
         }
-        stage('Stream job eoore') {
+        stage('Write Parameter_B') {
             steps {
                 script {
                     sh('ls')

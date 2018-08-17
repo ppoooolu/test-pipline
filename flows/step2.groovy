@@ -34,7 +34,7 @@ spec:
                 echo 'pppppp'
             }
         }
-        stage('Stream job eoore') {
+        stage('Start K8s label') {
             steps {
                 container('maven') {
                     sh 'mvn -version'
