@@ -1,4 +1,4 @@
-@Library('test-cj') import org.Fleet
+@Library('test-cj') import org.Fleets
 import groovy.json.JsonOutput
 import java.lang.reflect.Type
 
@@ -59,7 +59,7 @@ pipeline {
         stage('Write_Pipeline_Json') {
             steps {
                 script {
-                    echo "${Fleet.Fleets.CHOICES}"
+                    echo "${Fleets.CHOICES}"
                     if (!check_status("/tmp/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status")) {
                         try {
 //                            def pipeline_json_file = readJSON file: '/tmp/Pipeline_Template'
