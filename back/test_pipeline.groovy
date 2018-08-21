@@ -1,4 +1,4 @@
-@Library('test-cj') import org.Fleets
+@Library('test-cj') import org.Fleet
 import groovy.json.JsonOutput
 import java.lang.reflect.Type
 
