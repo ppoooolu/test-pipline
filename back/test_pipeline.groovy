@@ -46,7 +46,7 @@ def parameters_json = [
 ]
 
 //def fleets_choice=Fleet.Fleets.CHOICES
-//def fleet=new Fleets()
+def fleets =new Fleets()
 
 pipeline {
     agent any
@@ -59,7 +59,7 @@ pipeline {
         stage('Write_Pipeline_Json') {
             steps {
                 script {
-//                    echo "${fleet.CHOICES}"
+                    echo "${fleets.CHOICES}"
                     if (!check_status("/tmp/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status")) {
                         try {
 //                            def pipeline_json_file = readJSON file: '/tmp/Pipeline_Template'
