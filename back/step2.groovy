@@ -5,7 +5,7 @@ pipeline {
         kubernetes {
             label 'mypod'
             defaultContainer 'jnlp'
-            yaml '$container_Template'
+            yaml '${container_Template}'
         }
     }
     parameters {
