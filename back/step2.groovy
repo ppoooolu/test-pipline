@@ -1,11 +1,11 @@
 @Library('test-cj') pipelineLibrary
-def xx = libraryResource 'com/k8s/containerTemplate.yaml'
+def container_Template = libraryResource 'com/k8s/containerTemplate.yaml'
 pipeline {
     agent {
         kubernetes {
             label 'mypod'
             defaultContainer 'jnlp'
-            yaml ''
+            yaml '${container_Template}'
         }
     }
     parameters {
