@@ -1,5 +1,5 @@
 @Library('test-cj') pipelineLibrary
-def xx = libraryResource 'k8s/containerTemplate.yaml'
+def xx = libraryResource 'com/k8s/containerTemplate.yaml'
 pipeline {
     agent {
         kubernetes {
