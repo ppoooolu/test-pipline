@@ -1,11 +1,19 @@
-@Library('test-cj') pipelineLibrary
+@Library('test-cj@test') pipelineLibrary
+
+//library identifier: 'custom-lib@master', retriever: modernSCM(
+//        [$class: 'GitSCMSource',
+//         remote: 'git@git.mycorp.com:my-jenkins-utils.git',
+//         credentialsId: 'my-private-key'])
+
 def container_Template = libraryResource 'com/k8s/containerTemplate.yaml'
 pipeline {
     agent {
         kubernetes {
             label 'mypod'
             defaultContainer 'jnlp'
-            yaml '${container_Template}'
+            yaml "${container_Template}"
+            idleMinutes 3
+            slaveConnectTimeout 100
         }
     }
     parameters {

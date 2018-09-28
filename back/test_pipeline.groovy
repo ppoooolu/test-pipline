@@ -34,9 +34,9 @@ def write_parameters_file(_file,key1,_value){
 
 
 def pipeline_json = [
-        Write_Pipeline_Json:[index:1, status:"nu"],
-        Test_Step_1:[index:2, status:"nu"],
-        Test_Step_2:[index:3, status:"nu"]
+        Write_Pipeline_Json:[index:1, status:"nu", force_fun:false],
+        Test_Step_1:[index:2, status:"nu", force_fun:true],
+        Test_Step_2:[index:3, status:"nu", force_fun:true]
 ]
 
 def parameters_json = [
