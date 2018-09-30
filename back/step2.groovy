@@ -1,4 +1,4 @@
-@Library('test-cj@$env.BRANCH_NAME') pipelineLibrary
+@Library('test-cj@${env.BRANCH_NAME}') pipelineLibrary
 
 //library identifier: 'custom-lib@master', retriever: modernSCM(
 //        [$class: 'GitSCMSource',
