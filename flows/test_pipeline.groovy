@@ -1,4 +1,4 @@
-@Library('test-cj') import org.*
+@Library('test-cj@$env.BRANCH_NAME') import org.*
 import groovy.json.JsonOutput
 import java.lang.reflect.Type
 
