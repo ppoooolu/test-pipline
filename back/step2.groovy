@@ -12,8 +12,8 @@ pipeline {
             label 'mypod'
             defaultContainer 'jnlp'
             yaml "${container_Template}"
-            idleMinutes 3
-            slaveConnectTimeout 100
+//            idleMinutes 3
+//            slaveConnectTimeout 100
         }
     }
     parameters {
