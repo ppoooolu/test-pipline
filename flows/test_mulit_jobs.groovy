@@ -2,13 +2,14 @@
 def container_Template = libraryResource 'com/k8s/containerTemplate.yaml'
 
 pipeline {
+    agent any
+    
     parameters {
         string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
         text(name: 'other_parameters', defaultValue: '', description: 'other parameters')
     }
 
     stages {
-        agent any
         stage('Upload file') {
             steps {
                 script {
