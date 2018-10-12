@@ -1,16 +1,17 @@
 @Library('test-cj') pipelineLibrary
 def container_Template = libraryResource 'com/k8s/containerTemplate.yaml'
 
-def generateStage(job_id) {
+def generateStage(_job_id, _parametersMap) {
     return {
-        stage("stage: ${job_id}") {
+        stage("stage: ${_job_id}") {
             def _result = build job: 'test_step_1/master',
                 parameters: [
                         [
                                 $class: 'StringParameterValue',
                                 name  : 'job_id',
-                                value : job_id,
-                        ]
+                                value : _job_id,
+                        ],
+                        _parametersMap
                 ],
                 propagate: false
             echo "${_result.result}"
@@ -32,18 +33,26 @@ pipeline {
                 script {
                     echo "${params.other_parameters}"
 
-                    def xx = params.other_parameters.split('\n')
+                    def all_parameters = params.other_parameters.split('\n')
+
                     def all_jobs = params.job_ids.split('\n')
 
-                    def parallelStagesMap = all_jobs.collectEntries {
-                        ["${it}" : generateStage(it)]
+                    def parametersMap = all_parameters.collectEntries {
+                        [$class: "${it.split(':')[0]}",
+                         name: it.split(':')[1],
+                         value: it.split(':')[2]]
                     }
+
+                    def parallelStagesMap = all_jobs.collectEntries {
+                        ["${it}" : generateStage(it, parametersMap)]
+                    }
+
 
                     parallel parallelStagesMap
 
                     echo xx[0]
 
-//                    def _result = build job: 'test_step_1/master',
+//                    def _result = build job: 'test_mulit_jobs_child/master',
 //                            parameters: [
 //                                    [
 //                                            $class: 'StringParameterValue',
