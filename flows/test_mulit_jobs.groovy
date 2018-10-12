@@ -8,6 +8,7 @@ pipeline {
     }
 
     stages {
+        agent any
         stage('Upload file') {
             steps {
                 script {
