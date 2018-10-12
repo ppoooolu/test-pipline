@@ -1,15 +1,15 @@
 @Library('test-cj') pipelineLibrary
 def container_Template = libraryResource 'com/k8s/containerTemplate.yaml'
 
-def generateStage(job) {
+def generateStage(job_id) {
     return {
-        stage("stage: ${job}") {
+        stage("stage: ${job_id}") {
             def _result = build job: 'test_step_1/master',
                 parameters: [
                         [
                                 $class: 'StringParameterValue',
                                 name  : 'job_id',
-                                value : ${job},
+                                value : job_id,
                         ]
                 ],
                 propagate: false
