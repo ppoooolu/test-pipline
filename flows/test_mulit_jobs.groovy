@@ -1,6 +1,23 @@
 @Library('test-cj') pipelineLibrary
 def container_Template = libraryResource 'com/k8s/containerTemplate.yaml'
 
+def generateStage(job) {
+    return {
+        stage("stage: ${job}") {
+            def _result = build job: 'test_step_1/master',
+                parameters: [
+                        [
+                                $class: 'StringParameterValue',
+                                name  : 'job_id',
+                                value : ${job},
+                        ]
+                ],
+                propagate: false
+            echo "${_result.result}"
+        }
+    }
+}
+
 pipeline {
     agent any
 
@@ -18,14 +35,11 @@ pipeline {
                     def xx = params.other_parameters.split('\n')
                     def all_jobs = params.job_ids.split('\n')
 
-                    parallel(
-                            a: {
-                                echo "This is branch a"
-                            },
-                            b: {
-                                echo "This is branch b"
-                            }
-                    )
+                    def parallelStagesMap = all_jobs.collectEntries {
+                        ["${it}" : generateStage(it)]
+                    }
+
+                    parallel parallelStagesMap
 
                     echo xx[0]
 
