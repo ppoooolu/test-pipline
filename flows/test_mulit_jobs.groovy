@@ -5,7 +5,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
+        text(name: 'job_ids', defaultValue: 'xxxxxxx', description: 'job id')
         text(name: 'other_parameters', defaultValue: '', description: 'other parameters')
     }
 
@@ -15,9 +15,19 @@ pipeline {
                 script {
                     echo "${params.other_parameters}"
 
-                    def xx = ${params.other_parameters}.split('\n')
+                    def xx = params.other_parameters.split('\n')
+                    def all_jobs = params.job_ids.split('\n')
 
-                    echo xx
+                    parallel(
+                            a: {
+                                echo "This is branch a"
+                            },
+                            b: {
+                                echo "This is branch b"
+                            }
+                    )
+
+                    echo xx[0]
 
 //                    def _result = build job: 'test_step_1/master',
 //                            parameters: [
