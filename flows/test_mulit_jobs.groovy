@@ -4,7 +4,7 @@ def container_Template = libraryResource 'com/k8s/containerTemplate.yaml'
 def generateStage(_job_id, _parametersMap) {
     return {
         stage("stage: ${_job_id}") {
-            def _result = build job: 'test_step_1/master',
+            def _result = build job: 'test_mulit_jobs_child/master',
                 parameters: [
                         [
                                 $class: 'StringParameterValue',
@@ -38,9 +38,9 @@ pipeline {
                     def all_jobs = params.job_ids.split('\n')
 
                     def parametersMap = all_parameters.collectEntries {
-                        [$class: "${it.split(':')[0]}",
-                         name: it.split(':')[1],
-                         value: it.split(':')[2]]
+                        [$class: "${it.split(':')[0].trim()}",
+                         name: it.split(':')[1].trim(),
+                         value: it.split(':')[2].trim()]
                     }
 
                     def parallelStagesMap = all_jobs.collectEntries {
