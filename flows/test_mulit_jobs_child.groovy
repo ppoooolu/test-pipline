@@ -14,6 +14,7 @@ pipeline {
             steps {
                 script {
                     echo "${params.parameterA}"
+                    sh 'cd /test_step2'
                 }
             }
         }
