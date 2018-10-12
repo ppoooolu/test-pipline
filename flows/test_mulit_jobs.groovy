@@ -15,6 +15,9 @@ def generateStage(_job_id, _parametersMap) {
                 ],
                 propagate: false
             echo "${_result.result}"
+            if (_result.result != "SUCCESS") {
+                throw (_result.result)
+            }
         }
     }
 }
@@ -49,17 +52,6 @@ pipeline {
 
 
                     parallel parallelStagesMap
-
-//                    def _result = build job: 'test_mulit_jobs_child/master',
-//                            parameters: [
-//                                    [
-//                                            $class: 'StringParameterValue',
-//                                            name  : 'job_id',
-//                                            value : params.job_id,
-//                                    ]
-//                            ],
-//                            propagate: false
-//                    echo "${_result.result}"
                 }
             }
         }
