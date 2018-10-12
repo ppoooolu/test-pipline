@@ -50,8 +50,6 @@ pipeline {
 
                     parallel parallelStagesMap
 
-                    echo xx[0]
-
 //                    def _result = build job: 'test_mulit_jobs_child/master',
 //                            parameters: [
 //                                    [
