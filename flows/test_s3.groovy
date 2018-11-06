@@ -11,7 +11,7 @@ pipeline {
 //                script {
                     withAWS(credentials:'aws-playground', region:'us-east-1') {
 //                        s3Download(file: '/tmp/test.py', bucket: 'test', path: '/home/ubuntu/')
-                        s3Upload(file:'/tmp/test.py', bucket:'bb-test-pipeline', path:'test/file.txt')
+                        s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'/tmp/test.py', bucket:'bb-test-pipeline', path:'file.txt')
                     }
 //                }
             }
