@@ -37,14 +37,14 @@ pipeline {
                     sh 'cat ./master_version_repo/version'
 
                     current_version_name = current_version_list[0].split(':')[0]
-                    current_version_number = current_version_list[0].split(':')[0].toDouble()
+                    current_version_number = current_version_list[0].split(':')[1].toDouble()
                     current_version_prod = current_version_list[3].split(':')[0]
-                    current_version_prod_number = current_version_list[3].split(':')[0].toDouble()
+                    current_version_prod_number = current_version_list[3].split(':')[1].toDouble()
 
                     master_version_name = master_version_list[0].split(':')[0]
-                    master_version_number = master_version_list[0].split(':')[0].toDouble()
+                    master_version_number = master_version_list[0].split(':')[1].toDouble()
                     master_version_prod = master_version_list[3].split(':')[0]
-                    master_version_prod_number = master_version_list[3].split(':')[0].toDouble()
+                    master_version_prod_number = master_version_list[3].split(':')[1].toDouble()
 
                     if (master_version_name != 'version' || master_version_prod != 'prod' ||
                             current_version_name != 'version' || current_version_prod != 'prod')
