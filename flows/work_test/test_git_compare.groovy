@@ -26,8 +26,8 @@ pipeline {
                     git branch: 'master', url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: ''
                 }
                 script{
-                    sh '. current_version/version'
-                    sh '. master_version/version'
+                    sh 'cat . current_version/version'
+                    sh 'cat . master_version/version'
                 }
             }
         }
