@@ -7,7 +7,9 @@ pipeline {
         stage('Check branch'){
             when { branch 'master' }
             steps {
-                check_status =false
+                script {
+                    check_status = false
+                }
             }
 //            steps{
 //                script{
@@ -18,7 +20,9 @@ pipeline {
 //            }
         }
         stage('Get Repo') {
-            when { check_status true }
+            when {
+                expression {check_status == true}
+            }
             steps {
                 dir(current_version) {
                     git branch: BRANCH_NAME, url: 'git@bitbucket.org:user/test1.git', credentialsId: 'credentials_id'
