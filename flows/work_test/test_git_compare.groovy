@@ -31,10 +31,10 @@ pipeline {
                     master_version_list = readFile("./master_version_repo/version").split('\n')
 
                     echo "current_version_list:"
-                    echo current_version_list
+                    sh 'cat ./current_version_repo/version'
 
                     echo "master_version_list:"
-                    echo master_version_list
+                    sh 'cat ./master_version_repo/version'
 
                     current_version_name = current_version_list[0].split(':')[0]
                     current_version_number = current_version_list[0].split(':')[0].toDouble()
