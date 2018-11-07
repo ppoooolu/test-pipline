@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Get Repo') {
             when {
-                expression {check_status1 == true}
+                expression {check_status == true}
             }
             steps {
                 dir(current_version) {
