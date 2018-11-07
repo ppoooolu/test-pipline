@@ -18,11 +18,11 @@ pipeline {
                 expression {check_status == true}
             }
             steps {
-                dir(current_version) {
+                dir('current_version') {
                     git branch: env.BRANCH_NAME, url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: ''
                 }
 
-                dir(master_version) {
+                dir('master_version') {
                     git branch: master, url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: 'credentials_id'
                 }
                 script{
