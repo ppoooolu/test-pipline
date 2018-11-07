@@ -6,7 +6,7 @@ pipeline {
         stage('Get Repo') {
             steps {
                 dir('${env.BRANCH_NAME}'){
-                    echo 'aaaaaa'
+                    echo 'aaaaaabbbb'
                 }
             }
         }
