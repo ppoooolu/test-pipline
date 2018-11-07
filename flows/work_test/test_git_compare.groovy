@@ -18,16 +18,49 @@ pipeline {
                 expression {check_status == true}
             }
             steps {
-                dir('current_version') {
-                    git branch: env.BRANCH_NAME, url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: ''
+                dir('current_version_repo') {
+//                    git branch: env.BRANCH_NAME, url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: ''
+                    git branch: 'test1', url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: ''
                 }
 
-                dir('master_version') {
+                dir('master_version_repo') {
                     git branch: 'master', url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: ''
                 }
                 script{
-                    sh 'cat ./current_version/version'
-                    sh 'cat ./master_version/version'
+                    current_version_list = readFile("./current_version_repo/version").split('\n')
+                    master_version_list = readFile("./master_version_repo/version").split('\n')
+
+                    echo "current_version_list:"
+                    echo current_version_list
+
+                    echo "master_version_list:"
+                    echo master_version_list
+
+                    current_version_name = current_version_list[0].split(':')[0]
+                    current_version_number = current_version_list[0].split(':')[0].toDouble()
+                    current_version_prod = current_version_list[3].split(':')[0]
+                    current_version_prod_number = current_version_list[3].split(':')[0].toDouble()
+
+                    master_version_name = master_version_list[0].split(':')[0]
+                    master_version_number = master_version_list[0].split(':')[0].toDouble()
+                    master_version_prod = master_version_list[3].split(':')[0]
+                    master_version_prod_number = master_version_list[3].split(':')[0].toDouble()
+
+                    if (master_version_name != 'version' || master_version_prod != 'prod' ||
+                            current_version_name != 'version' || current_version_prod != 'prod')
+                    {
+                        error "Please check your version file key name or index!"
+                    }
+
+                    if (current_version_number < master_version_number){
+                        error "Please check your version number!"
+                    }
+                    else if(current_version_number > master_version_number){
+                        if (master_version_number != master_version_prod_number){
+                            error "master_version_number != master_version_prod_number"
+                        }
+                    }
+
                 }
             }
         }
