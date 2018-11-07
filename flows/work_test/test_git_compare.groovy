@@ -9,16 +9,9 @@ pipeline {
 //            expression { BRANCH_NAME ==~ /feature\/[0-9]+\.[0-9]+\.[0-9]+/ }
             steps {
                 script {
-                    check_status = false
+                    check_status = true
                 }
             }
-//            steps{
-//                script{
-//                    if (env.BRANCH_NAME=='master'){
-//                        check_status =false
-//                    }
-//                }
-//            }
         }
         stage('Get Repo') {
             when {
@@ -26,11 +19,15 @@ pipeline {
             }
             steps {
                 dir(current_version) {
-                    git branch: BRANCH_NAME, url: 'git@bitbucket.org:user/test1.git', credentialsId: 'credentials_id'
+                    git branch: env.BRANCH_NAME, url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: ''
                 }
 
-                dir('${env.BRANCH_NAME}') {
-                    git branch: BRANCH_NAME, url: 'git@bitbucket.org:user/test1.git', credentialsId: 'credentials_id'
+                dir(master_version) {
+                    git branch: master, url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: 'credentials_id'
+                }
+                script{
+                    sh '. current_version/version'
+                    sh '. master_version/version'
                 }
             }
         }
