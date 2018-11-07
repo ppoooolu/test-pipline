@@ -2,10 +2,11 @@
 def check_status = true
 pipeline {
     agent any
-    triggers { pollSCM('') }
+    triggers { pollSCM('* * * * *') }
     stages {
         stage('Check branch'){
             when { branch 'master' }
+//            expression { BRANCH_NAME ==~ /feature\/[0-9]+\.[0-9]+\.[0-9]+/ }
             steps {
                 script {
                     check_status = false
