@@ -23,7 +23,7 @@ pipeline {
                 }
 
                 dir('master_version') {
-                    git branch: master, url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: ''
+                    git branch: 'master', url: 'https://github.com/ppoooolu/test-pipline.git', credentialsId: ''
                 }
                 script{
                     sh '. current_version/version'
