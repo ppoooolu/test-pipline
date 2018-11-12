@@ -2,7 +2,7 @@
 def check_status = true
 pipeline {
     agent any
-    triggers { pollSCM('* * * * *') }
+    triggers { pollSCM('') }
     stages {
         stage('Check branch'){
             when { branch 'master' }
