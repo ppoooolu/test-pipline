@@ -18,7 +18,8 @@ pipeline {
         stage('Stream job eoore') {
             steps {
                 container('maven') {
-                    load 'my_env'
+
+                    load 'flows/env_test/my_env'
 //                    sh 'mvn -version'
                     sh 'env'
                 }
