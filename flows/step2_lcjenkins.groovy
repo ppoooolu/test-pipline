@@ -15,16 +15,12 @@ pipeline {
     }
 
     stages {
-        stage('Stream job') {
-            steps {
-                echo 'pppppp'
-            }
-        }
         stage('Stream job eoore') {
             steps {
                 container('maven') {
-                    sh 'mvn -version'
-//                    sh 'cd /test_step2'
+                    load 'my_env'
+//                    sh 'mvn -version'
+                    sh 'env'
                 }
             }
         }
