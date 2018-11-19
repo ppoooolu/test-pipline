@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+package s3
 
 def format_s3_file_path(job_id, job_name){
 
