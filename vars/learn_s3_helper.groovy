@@ -10,6 +10,6 @@ def s3_upload(filename, s3_path, profile){
     sh 'aws s3 cp ${filename} ${s3_path} --profile ${profile}'
 }
 
-def echo_test(){
+def echo_test(_message){
     echo 'aaaa ${my_path}'
 }
