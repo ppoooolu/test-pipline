@@ -1,5 +1,5 @@
 @Library('my-lib') pipelineLibrary
-import learn_s3_helper
+//import learn_s3_helper
 
 pipeline {
     agent any
@@ -11,7 +11,7 @@ pipeline {
         stage('Write Parameter_B') {
             steps {
                 script {
-                    learn_s3_helper.s3_ls
+                    learn_s3_helper.s3_ls()
                 }
             }
         }
