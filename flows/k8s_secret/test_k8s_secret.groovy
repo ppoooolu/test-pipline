@@ -42,7 +42,7 @@ spec:
         stage('Start K8s label') {
             steps {
                 container('maven') {
-                    sh 'knife block'
+                    sh 'ls -al ~/.chef'
                 }
             }
         }
