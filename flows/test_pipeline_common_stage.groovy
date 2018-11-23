@@ -99,7 +99,7 @@ pipeline {
                     pipeline_json.each { k, v ->
                         if (k !='Write_Pipeline_Json')
                         {
-                            test_pipeline_common_stage.common_stage(k,v)
+                            pipeline_common_stage.common_stage(k,v)
                         }
 
                     }
