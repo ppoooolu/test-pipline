@@ -1,4 +1,4 @@
-@Library('test-cj') import org.*
+@Library('test-cj') pipelineLibrary
 import groovy.json.JsonOutput
 import java.lang.reflect.Type
 
