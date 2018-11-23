@@ -1,9 +1,9 @@
-def common_stage(){
-    stage('Test_Step_1') {
+def common_stage(stage_json){
+    stage(stage_json[0]) {
         steps {
             script{
-                if (!check_status("/tmp/${params.job_id}_Pipeline", "Test_Step_1", "status")) {
-                    def _result = build job: 'test_step_1/master',
+                if (!check_status("/tmp/${params.job_id}_Pipeline", stage_json[0], "status")) {
+                    def _result = build job: stage_json[0]['sub_job'],
                             parameters: [
                                     [
                                             $class: 'StringParameterValue',
@@ -13,15 +13,13 @@ def common_stage(){
                             ],
                             propagate: false
                     echo "${_result.result}"
-                    if (_result.result == "SUCCESS") {
-                        def write_output = write_pipeline_file("/tmp/${params.job_id}_Pipeline", "Test_Step_1", "status", "SUCCESS")
-                    } else {
-                        def write_output = write_pipeline_file("/tmp/${params.job_id}_Pipeline", "Test_Step_1", "status", _result.result)
-                        error("Build failed Test_Step_1\n${_result.rawBuild.log}")
+                    def write_output = write_multi_pipeline_files("/tmp/${params.job_id}_Pipeline", stage_json[0], ["status","latest_job_link"], [_result.result,_result.absoluteUr])
+                    if (_result.result != "SUCCESS") {
+                        error("Build failed ${stage_json[0]}\n${_result.rawBuild.log}")
                     }
                 }
                 else {
-                    echo "skip Test_Step_1"
+                    echo "skip ${stage_json[0]}"
                 }
             }
         }

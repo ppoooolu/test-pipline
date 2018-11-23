@@ -21,6 +21,20 @@ def write_pipeline_file(_file,_key1,_key2,_value){
     return write_file_json
 }
 
+def write_multi_pipeline_files(_file,stage_key, _keys, _values){
+    def write_file_json = readJSON file: _file
+    echo "${write_file_json}"
+
+    for (int i = 0; i < _keys.size(); i++) {
+        write_file_json[stage_key][_keys[i]]=_values[i]
+    }
+
+    echo "${write_file_json}"
+    writeJSON(file: _file, json: write_file_json)
+    return write_file_json
+
+}
+
 def write_parameters_file(_file,key1,_value){
     def write_file_json = readJSON file: _file
     echo "${write_file_json}"
@@ -33,8 +47,8 @@ def write_parameters_file(_file,key1,_value){
 
 def pipeline_json = [
         Write_Pipeline_Json:[index:1, status:"nu"],
-        Test_Step_1:[index:2, status:"nu"],
-        Test_Step_2:[index:3, status:"nu"]
+        Test_Step_1:[index:2, status:"nu", is_retry:false, sub_job: test_step_1/master, latest_job_link:''],
+        Test_Step_2:[index:3, status:"nu", is_retry:false, sub_job: test_step_1/master, latest_job_link:'']
 ]
 
 def parameters_json = [
@@ -49,7 +63,6 @@ pipeline {
         string(name: 'job_id', defaultValue: 'xxxxxxx', description: 'job id')
     }
 
-
     stages {
         stage('Write_Pipeline_Json') {
             steps {
@@ -57,85 +70,32 @@ pipeline {
                     if (!check_status("/tmp/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status")) {
                         try {
                             pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
-                            pipeline_json=readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
+                            pipeline_json = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                             writeJSON(file: "/tmp/${params.job_id}_Pipeline", json: pipeline_json)
 
                             parameters_json.parameters_A = "Write_A"
-                            parameters_json=readJSON text: groovy.json.JsonOutput.toJson(parameters_json)
+                            parameters_json = readJSON text: groovy.json.JsonOutput.toJson(parameters_json)
                             writeJSON(file: "/tmp/${params.job_id}_Parameters", json: parameters_json)
 
                         }
                         catch (Exception e) {
                             echo 'Write_Pipeline_Json failed!'
                             pipeline_json.Write_Pipeline_Json.status = 'FAILED'
-                            pipeline_json=readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
+                            pipeline_json = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                             writeJSON(file: "/tmp/${params.job_id}_Pipeline", json: pipeline_json)
                             error(e)
                         }
-                    }
-                    else {
+                    } else {
                         echo "skip Write_Pipeline_Json"
                     }
                 }
             }
         }
 
-        stage('Test_Step_1') {
-            steps {
-                script{
-                    if (!check_status("/tmp/${params.job_id}_Pipeline", "Test_Step_1", "status")) {
-                        def _result = build job: 'test_step_1/master',
-                                parameters: [
-                                        [
-                                                $class: 'StringParameterValue',
-                                                name  : 'job_id',
-                                                value : params.job_id,
-                                        ]
-                                ],
-                                propagate: false
-                        echo "${_result.result}"
-                        if (_result.result == "SUCCESS") {
-                            def write_output = write_pipeline_file("/tmp/${params.job_id}_Pipeline", "Test_Step_1", "status", "SUCCESS")
-                        } else {
-                            def write_output = write_pipeline_file("/tmp/${params.job_id}_Pipeline", "Test_Step_1", "status", _result.result)
-                            error("Build failed Test_Step_1\n${_result.rawBuild.log}")
-                        }
-                    }
-                    else {
-                        echo "skip Test_Step_1"
-                    }
-                }
 
-            }
+    }
 
-        }
-
-        stage('Test_Step_2') {
-            steps {
-                script {
-                    if (!check_status("/tmp/${params.job_id}_Pipeline", "Test_Step_2", "status")) {
-                        def _result = build job: 'test_step_2/master',
-                                parameters: [
-                                        [
-                                                $class: 'StringParameterValue',
-                                                name  : 'job_id',
-                                                value : params.job_id,
-                                        ]
-                                ],
-                                propagate: false
-                        if (_result.result == "SUCCESS") {
-                            def write_output = write_pipeline_file("/tmp/${params.job_id}_Pipeline", "Test_Step_2", "status", "SUCCESS")
-                        } else {
-                            def write_output = write_pipeline_file("/tmp/${params.job_id}_Pipeline", "Test_Step_2", "status", _result.result)
-                            error("Build failed Test_Step_2\n${_result.rawBuild.log}")
-                        }
-                    }
-                    else {
-                        echo " skip Test_Step_2"
-                    }
-                }
-
-            }
-        }
+    list.each { item ->
+        pipeline_common_stage(item)
     }
 }
