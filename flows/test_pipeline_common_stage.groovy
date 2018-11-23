@@ -93,7 +93,7 @@ pipeline {
         }
 
 
-        stage{
+        stage('Run Job'){
             steps{
                 script{
                     list.each { item ->
