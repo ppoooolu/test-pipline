@@ -12,8 +12,10 @@ def s3_ls(){
     withEnv(["profile=$profile", "region=$region"]){
         sh 'aws s3 ls --profile ${profile} --region ${region}'
     }
-
+    return true
 }
+
+
 
 def echo_test(_message){
     echo 'aaaa'

@@ -5,4 +5,5 @@ class Environments {
 
     static final s3_profile = 'playground'
 
+    static final s3_bucketname = 'test-pipeline'
 }
