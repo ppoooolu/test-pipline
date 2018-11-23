@@ -12,7 +12,7 @@ def s3_ls(boolean my_s3_status){
     withEnv(["profile=$profile", "region=$region"]){
         sh 'aws s3 ls --profile ${profile} --region ${region}'
     }
-    my_s3_status=true
+    return true
 }
 
 
