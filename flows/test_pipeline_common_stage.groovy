@@ -92,17 +92,21 @@ pipeline {
             }
         }
 
-
-    }
-
-    stage{
-        steps{
-            script{
-                list.each { item ->
-                    pipeline_common_stage(item)
-                }
-            }
+        list.each { item ->
+            pipeline_common_stage(item)
         }
+
+//        stage{
+//            steps{
+//                script{
+//                    list.each { item ->
+//                        pipeline_common_stage(item)
+//                    }
+//                }
+//            }
+//        }
     }
+
+
 
 }
