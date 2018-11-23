@@ -11,8 +11,9 @@ pipeline {
         stage('Write Parameter_B') {
             steps {
                 script {
-                    def xx=learn_s3_helper.s3_ls()
-                    echo xx
+                    def _s3_status=false
+                    def xx=learn_s3_helper.s3_ls(_s3_status)
+                    echo _s3_status
                 }
             }
         }

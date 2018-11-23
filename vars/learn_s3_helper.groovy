@@ -6,13 +6,13 @@ def format_s3_file_path(job_id, job_name){
 
 }
 
-def s3_ls(){
+def s3_ls(s3_status){
     def profile = Environments.s3_profile
     def region =Environments.s3_region
     withEnv(["profile=$profile", "region=$region"]){
         sh 'aws s3 ls --profile ${profile} --region ${region}'
     }
-    return true
+    s3_status=true
 }
 
 
