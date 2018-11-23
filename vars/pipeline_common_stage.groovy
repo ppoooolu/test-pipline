@@ -1,7 +1,7 @@
 def common_stage(stage_name,stage_values){
     stage(stage_name) {
-        steps {
-            script{
+//        steps {
+//            script{
                 if (!check_status("/tmp/${params.job_id}_Pipeline", stage_name, "status")) {
                     def _result = build job: stage_values['sub_job'],
                             parameters: [
@@ -21,7 +21,7 @@ def common_stage(stage_name,stage_values){
                 else {
                     echo "skip ${stage_name}"
                 }
-            }
-        }
+//            }
+//        }
     }
 }

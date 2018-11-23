@@ -99,6 +99,7 @@ pipeline {
                     pipeline_json.each { k, v ->
                         if (k !='Write_Pipeline_Json')
                         {
+                            echo k
                             pipeline_common_stage.common_stage(k,v)
                         }
 
