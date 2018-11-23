@@ -92,9 +92,14 @@ pipeline {
             }
         }
 
-        list.each { item ->
-            pipeline_common_stage(item)
+        steps{
+            script{
+                list.each { item ->
+                    pipeline_common_stage(item)
+                }
+            }
         }
+
 
 //        stage{
 //            steps{
