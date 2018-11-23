@@ -1,3 +1,13 @@
+def check_status(file,key1,key2){
+    if (!fileExists(file)) {return false}
+    def check_file_json = readJSON file: file
+    echo "${check_file_json[key1][key2]}"
+    if (check_file_json[key1][key2] == 'SUCCESS'){
+        return true
+    }
+    return false
+}
+
 def common_stage(stage_name,stage_values){
     stage(stage_name) {
 //        steps {
