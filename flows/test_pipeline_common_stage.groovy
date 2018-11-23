@@ -47,8 +47,8 @@ def write_parameters_file(_file,key1,_value){
 
 def pipeline_json = [
         Write_Pipeline_Json:[index:1, status:"nu"],
-        Test_Step_1:[index:2, status:"nu", is_retry:false, sub_job: 'test_step_1/master', latest_job_link:''],
-        Test_Step_2:[index:3, status:"nu", is_retry:false, sub_job: 'test_step_2/master', latest_job_link:'']
+        Test_Step_1:[index:1, status:"null", is_retry:false, sub_job: 'test_step_1/master', latest_job_link:''],
+        Test_Step_2:[index:2, status:"null", is_retry:false, sub_job: 'test_step_2/master', latest_job_link:''],
 ]
 
 def parameters_json = [
@@ -69,7 +69,7 @@ pipeline {
                 script {
                     if (!check_status("/tmp/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status")) {
                         try {
-//                            pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
+                            pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
                             pipeline_json = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                             writeJSON(file: "/tmp/${params.job_id}_Pipeline", json: pipeline_json)
 
@@ -80,7 +80,7 @@ pipeline {
                         }
                         catch (Exception e) {
                             echo 'Write_Pipeline_Json failed!'
-//                            pipeline_json.Write_Pipeline_Json.status = 'FAILED'
+                            pipeline_json.Write_Pipeline_Json.status = 'FAILED'
                             pipeline_json = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                             writeJSON(file: "/tmp/${params.job_id}_Pipeline", json: pipeline_json)
                             error(e)
@@ -96,10 +96,10 @@ pipeline {
         stage('Run Job'){
             steps{
                 script{
-                    pipeline_json.each { item ->
-                        if (item[0] !='Write_Pipeline_Json')
+                    pipeline_json.each { k, v ->
+                        if (k !='Write_Pipeline_Json')
                         {
-                            pipeline_common_stage.common_stage(item)
+                            pipeline_common_stage.common_stage(k,v)
                         }
 
                     }
