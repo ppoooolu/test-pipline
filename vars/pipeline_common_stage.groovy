@@ -23,7 +23,7 @@ def common_stage(stage_name,stage_values){
                             ],
                             propagate: false
                     echo "${_result.result}"
-                    def write_output = write_multi_pipeline_files("/tmp/${params.job_id}_Pipeline", stage_name, ["status","latest_job_link"], [_result.result,_result.absoluteUr])
+                    def write_output = write_multi_pipeline_files("/tmp/${params.job_id}_Pipeline", stage_name, ["status","latest_job_link"], [_result.result,_result.absoluteUrl])
                     if (_result.result != "SUCCESS") {
                         error("Build failed ${stage_name}\n${_result.rawBuild.log}")
                     }
