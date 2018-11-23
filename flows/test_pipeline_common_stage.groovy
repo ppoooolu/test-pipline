@@ -96,8 +96,8 @@ pipeline {
         stage('Run Job'){
             steps{
                 script{
-                    list.each { item ->
-                        pipeline_common_stage(item)
+                    pipeline_json.each { item ->
+                        pipeline_common_stage.common_stage(item)
                     }
                 }
             }
