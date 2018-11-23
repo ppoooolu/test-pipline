@@ -1,4 +1,4 @@
-@Library('test-cj') pipelineLibrary
+@Library('my-lib') pipelineLibrary
 import groovy.json.JsonOutput
 import java.lang.reflect.Type
 
@@ -99,7 +99,7 @@ pipeline {
                     pipeline_json.each { k, v ->
                         if (k !='Write_Pipeline_Json')
                         {
-                            pipeline_common_stage.common_stage(k,v)
+                            test_pipeline_common_stage.common_stage(k,v)
                         }
 
                     }
