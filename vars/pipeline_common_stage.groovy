@@ -1,7 +1,7 @@
 
 def common_stage(stage_name,stage_values){
     stage(stage_name) {
-        if (!pipeline_json_help.check_status("/tmp/${params.job_id}_Pipeline", stage_name, "status")) {
+        if (!pipeline_json_help.check_status("/tmp/${params.job_id}_Pipeline", stage_name, "status",false)) {
             def _result = build job: stage_values['sub_job'],
                     parameters: [
                             [
