@@ -3,7 +3,7 @@ pipeline {
         kubernetes {
             label 'mypod'
             defaultContainer 'jnlp'
-            slaveConnectTimeout 60
+//            slaveConnectTimeout 60
             yaml """
 apiVersion: v1
 kind: Pod
