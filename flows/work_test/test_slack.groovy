@@ -18,9 +18,12 @@ pipeline {
 
     post {
         always {
-            /* Use slackNotifier.groovy from shared library and provide current build result as parameter */
-            slackNotifier.send(currentBuild.currentResult,'teamgreatwall')
-            cleanWs()
+            steps{
+                script{
+                    slackNotifier.send(currentBuild.currentResult,'teamgreatwall')
+                    cleanWs()
+                }
+            }
         }
     }
 }
