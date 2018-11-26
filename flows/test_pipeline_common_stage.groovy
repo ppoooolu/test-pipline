@@ -50,7 +50,6 @@ pipeline {
             }
         }
 
-
         stage('Run Job'){
             steps{
                 script{
