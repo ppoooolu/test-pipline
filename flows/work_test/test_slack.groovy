@@ -1,4 +1,5 @@
 @Library('my-lib') pipelineLibrary
+
 pipeline {
     agent any
     parameters {
@@ -18,7 +19,7 @@ pipeline {
     post {
         always {
             /* Use slackNotifier.groovy from shared library and provide current build result as parameter */
-            slackNotifier(currentBuild.currentResult,'teamgreatwall')
+            slackNotifier.send(currentBuild.currentResult,'teamgreatwall')
             cleanWs()
         }
     }
