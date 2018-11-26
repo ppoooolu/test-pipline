@@ -31,7 +31,7 @@ pipeline {
                     if (!pipeline_json_help.check_status("/tmp/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status", "is_retry")) {
                         try {
                             echo 'aaaaaaa'
-                            pipeline_json= readJSON file: './vars/com/pipeline_flow_json/test_pipeline.json'
+                            pipeline_json= readJSON file: './resources/com/pipeline_flow_json/test_pipeline.json'
                             pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
                             pipeline_json = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                             writeJSON(file: "/tmp/${params.job_id}_Pipeline", json: pipeline_json)
