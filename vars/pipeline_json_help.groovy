@@ -6,7 +6,7 @@ def check_status(file,stage_key, status_key, retry_key){
     def check_file_json = readJSON file: file
     echo "${check_file_json[stage_key][status_key]}"
     echo "${check_file_json[stage_key][retry_key]}"
-    if (check_file_json[key1][key2] == 'SUCCESS'){
+    if (check_file_json[stage_key][retry_key] == 'SUCCESS'){
         return true
     }
     return false
