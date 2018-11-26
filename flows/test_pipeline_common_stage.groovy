@@ -2,12 +2,13 @@
 import groovy.json.JsonOutput
 import java.lang.reflect.Type
 
+pipeline_json = libraryResource 'com/pipeline_flow_json/test_pipeline.json'
 
-def pipeline_json = [
-        Write_Pipeline_Json:[index:1, status:"nu", is_retry:false],
-        Test_Step_1:[index:1, status:"null", is_retry:false, sub_job: 'test_step_1/master', latest_job_link:''],
-        Test_Step_2:[index:2, status:"null", is_retry:false, sub_job: 'test_step_2/master', latest_job_link:''],
-]
+//def pipeline_json = [
+//        Write_Pipeline_Json:[index:1, status:"nu", is_retry:false],
+//        Test_Step_1:[index:1, status:"null", is_retry:false, sub_job: 'test_step_1/master', latest_job_link:''],
+//        Test_Step_2:[index:2, status:"null", is_retry:false, sub_job: 'test_step_2/master', latest_job_link:''],
+//]
 
 def parameters_json = [
         parameters_A: "A",
