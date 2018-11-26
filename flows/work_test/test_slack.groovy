@@ -18,11 +18,10 @@ pipeline {
 
     post {
         always {
-
-            slackNotifier.send(currentBuild.currentResult,'teamgreatwall')
-            cleanWs()
-
-            
+            script{
+                slackNotifier(currentBuild.currentResult,'teamgreatwall')
+                cleanWs()
+            }
         }
     }
 }
