@@ -58,7 +58,7 @@ pipeline {
                         if (k !='Write_Pipeline_Json')
                         {
                             echo k
-                            pipeline_common_stage.common_stage(k,v)
+                            pipeline_common_stage.pipeline_common_stage(k,v)
                         }
 
                     }
