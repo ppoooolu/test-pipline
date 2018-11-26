@@ -22,6 +22,13 @@ spec:
     command:
     - cat
     tty: true
+  readinessProbe:
+  exec:
+    command:
+    - cat
+    - /tmp/healthy
+  timeoutSeconds: 10
+
 """
         }
     }
