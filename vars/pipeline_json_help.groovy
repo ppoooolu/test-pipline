@@ -12,7 +12,17 @@ def check_status(file,stage_key, status_key, retry_key){
     return false
 }
 
-def check_retry(){
+def write_multi_pipeline_files(_file,stage_key, _keys, _values){
+    def write_file_json = readJSON file: _file
+    echo "${write_file_json}"
+
+    for (int i = 0; i < _keys.size(); i++) {
+        write_file_json[stage_key][_keys[i]]=_values[i]
+    }
+
+    echo "${write_file_json}"
+    writeJSON(file: _file, json: write_file_json)
+    return write_file_json
 
 }
 
