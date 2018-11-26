@@ -4,7 +4,7 @@ import java.lang.reflect.Type
 
 pipeline_json_str = libraryResource 'com/pipeline_flow_json/test_pipeline.json'
 //printf(pipeline_json_str)
-pipeline_json = []
+pipeline_json =  readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
 
 //def pipeline_json = [
 //        Write_Pipeline_Json:[index:1, status:"nu", is_retry:false],
