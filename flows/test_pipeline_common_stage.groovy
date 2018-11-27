@@ -3,8 +3,8 @@ import groovy.json.JsonOutput
 import java.lang.reflect.Type
 
 pipeline_json_str = libraryResource 'com/pipeline_flow_json/test_pipeline.json'
-//printf(pipeline_json_str)
-pipeline_json =  readJSON file: './resources/com/pipeline_flow_json/test_pipeline.json'
+
+pipeline_json= readJSON text: pipeline_json_str
 
 //def pipeline_json = [
 //        Write_Pipeline_Json:[index:1, status:"nu", is_retry:false],
@@ -28,12 +28,12 @@ pipeline {
         stage('Write_Pipeline_Json') {
             steps {
                 script {
+
                     if (!pipeline_json_help.check_status("/tmp/${params.job_id}_Pipeline", "Write_Pipeline_Json", "status", "is_retry")) {
                         try {
-//                            echo 'aaaaaaa'
 //                            pipeline_json= readJSON file: './resources/com/pipeline_flow_json/test_pipeline.json'
                             pipeline_json.Write_Pipeline_Json.status = 'SUCCESS'
-                            pipeline_json = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
+                            //pipeline_json = readJSON text: groovy.json.JsonOutput.toJson(pipeline_json)
                             writeJSON(file: "/tmp/${params.job_id}_Pipeline", json: pipeline_json)
 
                             parameters_json.parameters_A = "Write_A"
