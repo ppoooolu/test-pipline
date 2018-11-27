@@ -58,14 +58,14 @@ pipeline {
         }
 
         stage('Run Job'){
-            agent {
-                kubernetes {
-                    label 'mypod'
-                    defaultContainer 'aws-cli'
-                    yaml "${container_Template}"
-                }
-            }
-            
+//            agent {
+//                kubernetes {
+//                    label 'mypod'
+//                    defaultContainer 'aws-cli'
+//                    yaml "${container_Template}"
+//                }
+//            }
+
             steps{
                 script{
                     pipeline_json.each { k, v ->

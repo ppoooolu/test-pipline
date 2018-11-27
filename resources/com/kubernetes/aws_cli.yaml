@@ -4,11 +4,6 @@ metadata:
   labels:
     some-label: some-label-value
 spec:
-  hostAliases:
-    - ip: "10.103.59.210"
-      hostnames:
-      - "stash.bbpd.io"
-
   containers:
   - name: maven
     image: maven:3.3.9-jdk-8-alpine
