@@ -27,10 +27,6 @@ pipeline {
 
     stages {
 
-        agent {
-            docker "our-build-tools-image"
-        }
-
         stage('Write_Pipeline_Json') {
             steps {
                 script {
@@ -69,6 +65,7 @@ pipeline {
                     yaml "${container_Template}"
                 }
             }
+            
             steps{
                 script{
                     pipeline_json.each { k, v ->
