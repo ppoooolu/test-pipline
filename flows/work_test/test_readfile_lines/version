@@ -1,0 +1,8 @@
+// repo version, corresponding to playground/dev by default
+version: 2.4
+// repo version, corresponding to playground/dev by default
+// repo version, corresponding to playground/dev by default
+test: 2.2
+stage: 2.3
+// repo version, corresponding to playground/dev by default
+prod: 2.4
