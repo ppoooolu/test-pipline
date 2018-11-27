@@ -3,6 +3,7 @@ import groovy.json.JsonOutput
 import java.lang.reflect.Type
 
 pipeline_json_str = libraryResource 'com/pipeline_flow_json/test_pipeline.json'
+def container_Template = libraryResource 'com/kubernetes/aws_cli.yaml'
 
 pipeline_json= readJSON text: pipeline_json_str
 
@@ -25,6 +26,11 @@ pipeline {
     }
 
     stages {
+
+        agent {
+            docker "our-build-tools-image"
+        }
+
         stage('Write_Pipeline_Json') {
             steps {
                 script {
@@ -56,6 +62,13 @@ pipeline {
         }
 
         stage('Run Job'){
+            agent {
+                kubernetes {
+                    label 'mypod'
+                    defaultContainer 'aws-cli'
+                    yaml "${container_Template}"
+                }
+            }
             steps{
                 script{
                     pipeline_json.each { k, v ->
