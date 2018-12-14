@@ -156,7 +156,7 @@ jobList.each{job_i->
     String includes_branch = job_i.includes_branch
     String excludes_branch = job_i.excludes_branch
 
-    multibranchPipelineJob('example') {
+    multibranchPipelineJob(name) {
         branchSources {
             git {
                 remote('ssh://git@stash.bbpd.io/'+stashProject+'/'+stashRepo)
