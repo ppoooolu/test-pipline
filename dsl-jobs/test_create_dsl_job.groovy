@@ -1,5 +1,5 @@
 import javaposse.jobdsl.dsl.Job
-//import dsl.CreateMulitibranchPipelineJob
+import dsl.CreateMulitibranchPipelineJob
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.jobs.MultibranchWorkflowJob
 
