@@ -19,6 +19,13 @@ jobList = [
                 jenkinsfile_path:"workflow/deploy-tool/lic_multi_jobs.groovy"
         ],
         [
+                name:"lic_multi_jobs_2",
+                description:"run multi jobs",
+                stashProject:"l4c",
+                stashRepo:"jenkins-pipeline",
+                jenkinsfile_path:"workflow/deploy-tool/lic_multi_jobs.groovy"
+        ],
+        [
                 name:"lic_one_time_auth_demo",
                 description:"lic_one_time_auth_demo job",
                 stashProject:"l4c",
