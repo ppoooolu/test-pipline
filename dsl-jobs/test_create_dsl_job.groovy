@@ -157,6 +157,7 @@ jobList.each{job_i->
     String excludes_branch = job_i.excludes_branch
 
     multibranchPipelineJob(name) {
+        description(description)
         branchSources {
             git {
                 remote('ssh://git@stash.bbpd.io/'+stashProject+'/'+stashRepo)
@@ -165,9 +166,14 @@ jobList.each{job_i->
                 excludes(excludes_branch)
             }
         }
+        factory {
+            workflowBranchProjectFactory {
+                scriptPath(jenkinsfile_path)
+            }
+        }
         orphanedItemStrategy {
             discardOldItems {
-                numToKeep(20)
+                numToKeep(200)
             }
         }
     }
