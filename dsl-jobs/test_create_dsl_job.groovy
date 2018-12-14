@@ -1,5 +1,5 @@
 import javaposse.jobdsl.dsl.Job
-import dsl.CreateMulitibranchPipelineJob
+//import dsl.CreateMulitibranchPipelineJob
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.jobs.MultibranchWorkflowJob
 
@@ -50,18 +50,6 @@ jobList = [
 //                inludes_branch:"master"
 //        ]
 ]
-
-jobList.each{job_i->
-    Job collectParamsJob = new CreateMulitibranchPipelineJob(
-            name: job_i.name,
-            description: job_i.description,
-            stashProject: job_i.stashProject,
-            stashRepo: job_i.stashRepo,
-            excludes_branch: job_i.excludes_branch,
-            includes_branch: job_i.includes_branch,
-            jenkinsfile_path: job_i.jenkinsfile_path
-    ).build(this)
-}
 
 class CreateMulitibranchPipelineJob {
     String name =''
@@ -156,3 +144,16 @@ class CreateMulitibranchPipelineJob {
 
     }
 }
+
+jobList.each{job_i->
+    Job collectParamsJob = new CreateMulitibranchPipelineJob(
+            name: job_i.name,
+            description: job_i.description,
+            stashProject: job_i.stashProject,
+            stashRepo: job_i.stashRepo,
+            excludes_branch: job_i.excludes_branch,
+            includes_branch: job_i.includes_branch,
+            jenkinsfile_path: job_i.jenkinsfile_path
+    ).build(this)
+}
+
