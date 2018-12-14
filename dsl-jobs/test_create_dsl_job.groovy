@@ -61,6 +61,7 @@ jobList.each{job_i->
     String stash_credentialsId ='4af2df8-e947-4ae0-ba51-b2a25690304d'
     String includes_branch = job_i.includes_branch
     String excludes_branch = job_i.excludes_branch
+    String job_folder = job_i.folder
 
     multibranchPipelineJob('my-folder/'+name) {
         description(job_description)
@@ -77,7 +78,6 @@ jobList.each{job_i->
                 scriptPath(jenkinsfile_path)
             }
         }
-        folder('my-folder', null)
         orphanedItemStrategy {
             discardOldItems {
                 numToKeep(200)
