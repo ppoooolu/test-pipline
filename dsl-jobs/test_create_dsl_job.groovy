@@ -18,13 +18,6 @@ jobList = [
                 stashRepo:"jenkins-pipeline",
                 jenkinsfile_path:"workflow/deploy-tool/lic_multi_jobs.groovy"
         ],
-        [
-                name:"lic_one_time_auth_demo",
-                description:"lic_one_time_auth_demo job",
-                stashProject:"l4c",
-                stashRepo:"jenkins-pipeline",
-                jenkinsfile_path:"workflow/login/Jenkinsfile-one-time-auth.groovy"
-        ]
 //        ,
 //        [
 //                name:"cloudFormation_version_check",
