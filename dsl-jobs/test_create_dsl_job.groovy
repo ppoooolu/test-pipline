@@ -77,6 +77,7 @@ jobList.each{job_i->
                 scriptPath(jenkinsfile_path)
             }
         }
+        folder('my-folder', null)
         orphanedItemStrategy {
             discardOldItems {
                 numToKeep(200)
