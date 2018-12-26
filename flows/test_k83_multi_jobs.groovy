@@ -26,7 +26,7 @@ spec:
                 script{
                     def _count = 0
                     while( true ) {
-                        echo env.JOB_ID
+                        echo env.BUILD_ID
                         _count+=1
                         sleep 1000
                         if( x.finished ) break
