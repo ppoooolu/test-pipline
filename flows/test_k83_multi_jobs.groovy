@@ -29,7 +29,7 @@ spec:
                         echo env.BUILD_ID
                         _count+=1
                         sleep 1000
-                        if( x.finished ) break
+                        if( _count == 100 ) break
                     }
                 }
             }
