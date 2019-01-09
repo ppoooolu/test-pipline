@@ -75,6 +75,9 @@ jobList.each{job_i->
                 credentialsId(stash_credentialsId)
                 includes(includes_branch)
                 excludes(excludes_branch)
+
+            }
+            branchSource{
                 strategy {
                     defaultBranchPropertyStrategy {
                         noTriggerBranchProperty()
