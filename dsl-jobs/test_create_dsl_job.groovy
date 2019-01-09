@@ -76,29 +76,29 @@ jobList.each{job_i->
                 includes(includes_branch)
                 excludes(excludes_branch)
 
-                namedExceptionsBranchPropertyStrategy {
-                    // only trigger branch build for the `master` branch
-                    defaultProperties {
-                        noTriggerBranchProperty()
-                    }
-                    namedException {
-                        // could include noTriggerBranchProperty() here if there was no default properties
-                        branch('master')
-                    }
-                }
-
-            }
-//            branchSource {
-//                source{
-//                    strategy {
-//                        defaultBranchPropertyStrategy {
-//                            defaultProperties {
-//                                noTriggerBranchProperty()
-//                            }
-//                        }
+//                namedExceptionsBranchPropertyStrategy {
+//                    // only trigger branch build for the `master` branch
+//                    defaultProperties {
+//                        noTriggerBranchProperty()
+//                    }
+//                    namedException {
+//                        // could include noTriggerBranchProperty() here if there was no default properties
+//                        branch('master')
 //                    }
 //                }
-//            }
+
+            }
+            branchSource {
+                source{
+                    strategy {
+                        defaultBranchPropertyStrategy {
+                            props {
+                                noTriggerBranchProperty()
+                            }
+                        }
+                    }
+                }
+            }
         }
         factory {
             workflowBranchProjectFactory {
