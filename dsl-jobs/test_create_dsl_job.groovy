@@ -77,10 +77,12 @@ jobList.each{job_i->
                 excludes(excludes_branch)
 
             }
-            branchSource{
-                strategy {
-                    defaultBranchPropertyStrategy {
-//                        noTriggerBranchProperty()
+            branchSource {
+                source{
+                    strategy {
+                        defaultBranchPropertyStrategy {
+    //                        noTriggerBranchProperty()
+                        }
                     }
                 }
             }
