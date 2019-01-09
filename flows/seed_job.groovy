@@ -8,6 +8,8 @@ pipeline {
                         additionalClasspath: 'jobs',
                         removedJobAction: 'DELETE',
                         removedViewAction: 'DELETE',
+                        ignoreExisting: false,
+                        ignoreMissingFiles: false,
                         targets: 'dsl-jobs/*',
                         unstableOnDeprecation: true,
                         sandbox: true
