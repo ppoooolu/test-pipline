@@ -72,7 +72,7 @@ jobList.each{job_i->
                 includes(includes_branch)
                 excludes(excludes_branch)
             }
-            branchSource {
+            source {
                 strategy {
                     namedExceptionsBranchPropertyStrategy {
                         defaultProperties {
