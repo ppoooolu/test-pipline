@@ -72,14 +72,16 @@ jobList.each{job_i->
                 includes(includes_branch)
                 excludes(excludes_branch)
             }
-            strategy{
-                namedExceptionsBranchPropertyStrategy {
-                    defaultProperties {
-                        noTriggerBranchProperty()
-                    }
-                    namedExceptions {
-                        named {
-                            name('master')
+            branchSource {
+                strategy {
+                    namedExceptionsBranchPropertyStrategy {
+                        defaultProperties {
+                            noTriggerBranchProperty()
+                        }
+                        namedExceptions {
+                            named {
+                                name('master')
+                            }
                         }
                     }
                 }
