@@ -9,28 +9,32 @@ jobList = [
                 description:"rds-monitor-deploy multibranch job",
                 stashProject:"l4c",
                 stashRepo:"serverless-projects",
-                jenkinsfile_path:"rds-monitoring/Jenkinsfile"
+                jenkinsfile_path:"rds-monitoring/Jenkinsfile",
+                folder:"SaaS"
         ],
         [
                 name:"lic_multi_jobs",
                 description:"run multi jobs",
                 stashProject:"l4c",
                 stashRepo:"jenkins-shared-operations",
-                jenkinsfile_path:"workflow/deploy-tool/lic_multi_jobs.groovy"
+                jenkinsfile_path:"workflow/deploy-tool/lic_multi_jobs.groovy",
+                folder:"SaaS"
         ],
         [
                 name:"lic_multi_jobs_2",
                 description:"run multi jobs",
                 stashProject:"l4c",
                 stashRepo:"jenkins-shared-operations",
-                jenkinsfile_path:"workflow/deploy-tool/lic_multi_jobs.groovy"
+                jenkinsfile_path:"workflow/deploy-tool/lic_multi_jobs.groovy",
+                folder:"SaaS"
         ],
         [
                 name:"lic_one_time_auth_demo",
                 description:"lic_one_time_auth_demo job",
                 stashProject:"l4c",
                 stashRepo:"jenkins-shared-operations",
-                jenkinsfile_path:"workflow/login/Jenkinsfile-one-time-auth.groovy"
+                jenkinsfile_path:"workflow/login/Jenkinsfile-one-time-auth.groovy",
+                folder:"SaaS"
         ]
 //        ,
 //        [
@@ -63,7 +67,7 @@ jobList.each{job_i->
     String excludes_branch = job_i.excludes_branch
     String job_folder = job_i.folder
 
-    multibranchPipelineJob('my-folder/'+name) {
+    multibranchPipelineJob(job_folder+'/'+name) {
         description(job_description)
         branchSources {
             git {
@@ -71,19 +75,8 @@ jobList.each{job_i->
                 credentialsId(stash_credentialsId)
                 includes(includes_branch)
                 excludes(excludes_branch)
-            }
-            source {
-                strategy {
-                    namedExceptionsBranchPropertyStrategy {
-                        defaultProperties {
-                            noTriggerBranchProperty()
-                        }
-//                        namedExceptions {
-//                            named {
-//                                name('master')
-//                            }
-//                        }
-                    }
+                defaultBranchPropertyStrategy {
+                    noTriggerBranchProperty()
                 }
             }
         }

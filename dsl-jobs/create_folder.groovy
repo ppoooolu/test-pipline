@@ -1,6 +1,5 @@
 folderlist = [
-        [name: "aaaaa", description: "aaaaaaa"],
-        [name: "bbbbb", description: "bbbbbbb"],
+        [name: "SaaS", description: "SaaS"],
 ]
 
 folderlist.each{job_i->
