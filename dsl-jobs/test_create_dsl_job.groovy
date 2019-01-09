@@ -81,7 +81,9 @@ jobList.each{job_i->
                 source{
                     strategy {
                         defaultBranchPropertyStrategy {
-                            properties(noTriggerBranchProperty())
+                            defaultProperties {
+                                noTriggerBranchProperty()
+                            }
                         }
                     }
                 }
