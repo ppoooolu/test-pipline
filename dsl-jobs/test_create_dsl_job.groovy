@@ -97,11 +97,11 @@ jobList.each{job_i->
                         defaultProperties {
                             noTriggerBranchProperty()
                         }
-                        namedExceptions {
-                            named {
-                                name('master')
-                            }
-                        }
+//                        namedExceptions {
+//                            named {
+//                                name('master')
+//                            }
+//                        }
                     }
 //                    defaultBranchPropertyStrategy {
 //                        props {
