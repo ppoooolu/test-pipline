@@ -70,11 +70,14 @@ jobList.each{job_i->
     multibranchPipelineJob(job_folder+'/'+name) {
         description(job_description)
         branchSources {
-            git {
-                remote('ssh://git@stash.bbpd.io/'+stashProject+'/'+stashRepo)
-                credentialsId(stash_credentialsId)
-                includes(includes_branch)
-                excludes(excludes_branch)
+
+            branchSource {
+                source {
+                    git {
+                        remote('ssh://git@stash.bbpd.io/' + stashProject + '/' + stashRepo)
+                        credentialsId(stash_credentialsId)
+                        includes(includes_branch)
+                        excludes(excludes_branch)
 
 //                namedExceptionsBranchPropertyStrategy {
 //                    // only trigger branch build for the `master` branch
@@ -87,14 +90,12 @@ jobList.each{job_i->
 //                    }
 //                }
 
-            }
-            branchSource {
-                source{
-                    strategy {
-                        defaultBranchPropertyStrategy {
-                            props {
-                                noTriggerBranchProperty()
-                            }
+                    }
+                }
+                strategy {
+                    defaultBranchPropertyStrategy {
+                        props {
+                            noTriggerBranchProperty()
                         }
                     }
                 }
