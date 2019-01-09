@@ -71,16 +71,14 @@ jobList.each{job_i->
                 credentialsId(stash_credentialsId)
                 includes(includes_branch)
                 excludes(excludes_branch)
-            }
-            strategy {
                 namedExceptionsBranchPropertyStrategy {
+                    // only trigger branch build for the `master` branch
                     defaultProperties {
                         noTriggerBranchProperty()
                     }
-                    namedExceptions {
-                        named {
-                            name('master')
-                        }
+                    namedException {
+                        // could include noTriggerBranchProperty() here if there was no default properties
+                        branch('master')
                     }
                 }
             }
