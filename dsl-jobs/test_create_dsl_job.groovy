@@ -92,23 +92,23 @@ jobList.each{job_i->
 
                     }
                 }
-                strategy {
-                    namedExceptionsBranchPropertyStrategy {
-                        defaultProperties {
-                            noTriggerBranchProperty()
-                        }
+//                strategy {
+//                    namedExceptionsBranchPropertyStrategy {
+//                        defaultProperties {
+//                            noTriggerBranchProperty()
+//                        }
 //                        namedExceptions {
 //                            named {
 //                                name('master')
 //                            }
 //                        }
-                    }
+//                    }
 //                    defaultBranchPropertyStrategy {
 //                        props {
 //                            noTriggerBranchProperty()
 //                        }
 //                    }
-                }
+//                }
             }
         }
 
@@ -125,18 +125,6 @@ jobList.each{job_i->
 
         configure {
             it / sources / 'data' / 'jenkins.branch.BranchSource' << {
-//                    source(class: 'jenkins.plugins.git.GitSCMSource') {
-//                        id(uuid)
-//                        remote("git@gitlab:root/repo.git")
-//                        credentialsId("ssh_key")
-//                        includes('*')
-//                        excludes('')
-//                        ignoreOnPushNotifications('false')
-//                        traits {
-//                            'jenkins.plugins.git.traits.BranchDiscoveryTrait'()
-//                        }
-//                    }
-
 //                 default strategy when sourcing from a branch
                     strategy(class: "jenkins.branch.NamedExceptionsBranchPropertyStrategy") {
                         defaultProperties(class: "java.util.Arrays\$ArrayList") {
@@ -146,16 +134,6 @@ jobList.each{job_i->
                             }
                         }
                     }
-
-//                    strategy(class: "jenkins.branch.DefaultBranchPropertyStrategy") {
-//                        defaultProperties(class: "java.util.Arrays\$ArrayList") {
-//                            a(class: "jenkins.branch.BranchProperty-array") {
-//                                // don't trigger builds
-//                                "jenkins.branch.NoTriggerBranchProperty"()
-//                            }
-//                        }
-//                    }
-
             }
         }
     }
