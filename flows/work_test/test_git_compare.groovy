@@ -36,6 +36,12 @@ pipeline {
                     echo "master_version_list:"
                     sh 'cat ./master_version_repo/version'
 
+                    def aa='4.9'
+                    def bb='4.10'
+
+                    echo aa.toDouble()
+                    echo bb.toDouble()
+
                     current_version_name = current_version_list[0].split(':')[0]
                     current_version_number = current_version_list[0].split(':')[1].toDouble()
                     current_version_prod = current_version_list[3].split(':')[0]
