@@ -39,8 +39,8 @@ pipeline {
                     def aa='4.9'
                     def bb='4.10'
 
-                    echo aa.toDouble()
-                    echo bb.toDouble()
+                    echo aa.replace(".",'').toInteger().toString()
+                    echo bb.replace(".",'').toInteger().toString()
 
                     current_version_name = current_version_list[0].split(':')[0]
                     current_version_number = current_version_list[0].split(':')[1].toDouble()
