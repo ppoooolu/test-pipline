@@ -10,7 +10,7 @@ pipeline {
                         removedViewAction: 'DELETE',
                         ignoreExisting: false,
                         ignoreMissingFiles: false,
-                        targets: 'dsl-jobs/*',
+                        targets: 'dsl-jobs/test_create_dsl_job_new.groovy',
                         unstableOnDeprecation: true,
                         sandbox: true
                 )
