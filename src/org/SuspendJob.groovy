@@ -44,6 +44,9 @@ class SuspendJob {
                 }
 
                 f.computation.run()
+
+                def scan = jenkins.branch.OrganizationFolder.OrganizationScan(f)
+                f.scan()
             }
         }
     }
