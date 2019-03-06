@@ -22,7 +22,8 @@ class SuspendJob {
     }
 
     static void suspend2() {
-        for (f in Jenkins.instance.getItemByFullName('SaaS/test_env')){
+//        for (f in Jenkins.instance.getItemByFullName('SaaS/test_env')){
+        for (f in    Jenkins.instance.getItemMap()['test_env','test_env2']){
 //            if (f.parent instanceof jenkins.branch.OrganizationFolder) {
 //                continue;
 //            }
