@@ -62,7 +62,7 @@ jobList.each{job_i->
     String stashRepo = job_i.stashRepo
     String stashBranch = 'master'
     String jenkinsfile_path = job_i.jenkinsfile_path
-    String stash_credentialsId ='jenkins-stash'
+    String stash_credentialsId ='stash'
     String includes_branch = job_i.includes_branch
     String excludes_branch = job_i.excludes_branch
     String job_folder = job_i.folder
