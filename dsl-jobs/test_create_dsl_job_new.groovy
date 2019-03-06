@@ -75,13 +75,13 @@ jobList.each { job_i ->
 //                    }
                     }
 
-                    strategy {
-                        defaultBranchPropertyStrategy {
-                            props {
-                                noTriggerBranchProperty()
-                            }
-                        }
-                    }
+//                    strategy {
+//                        defaultBranchPropertyStrategy {
+//                            props {
+//                                noTriggerBranchProperty()
+//                            }
+//                        }
+//                    }
 
                 }
             }
