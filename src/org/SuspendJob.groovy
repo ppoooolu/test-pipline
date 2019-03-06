@@ -22,7 +22,7 @@ class SuspendJob {
     }
 
     static void suspend2() {
-        for (f in Jenkins.instance.getItemMap(jenkins.branch.MultiBranchProject.class)['test_env']){
+        for (f in Jenkins.instance.getItemMap()['test_env']){
             if (f.parent instanceof jenkins.branch.OrganizationFolder) {
                 continue;
             }
