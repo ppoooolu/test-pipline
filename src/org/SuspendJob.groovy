@@ -47,8 +47,8 @@ class SuspendJob {
                 f.computation.run()
 
 //                def scan = jenkins.branch.OrganizationFolder.OrganizationScan(f)
-                def aa = f.createComputation
-                aa.scan()
+//                def aa = f.createComputation
+                f.doConfigSubmit()
             }
         }
     }
