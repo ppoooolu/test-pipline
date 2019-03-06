@@ -20,4 +20,17 @@ class SuspendJob {
             f.computation.run()
         }
     }
+
+    static void suspend2() {
+        for (f in Jenkins.instance.getItemMap()['SaaS/test_env']){
+            for (s in f.sources) {
+                def prop = new jenkins.branch.NoTriggerBranchProperty();
+                def propList = [prop] as jenkins.branch.BranchProperty[];
+                def strategy = new jenkins.branch.DefaultBranchPropertyStrategy(propList);
+                s.setStrategy(strategy);
+            }
+
+            f.computation.run()
+        }
+    }
 }

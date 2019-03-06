@@ -1,3 +1,6 @@
+@Library('my-lib') pipelineLibrary
+import org.SuspendJob
+
 pipeline {
     agent any
     triggers { pollSCM('') }
@@ -14,6 +17,14 @@ pipeline {
                         unstableOnDeprecation: true,
                         sandbox: true
                 )
+            }
+        }
+
+        stage('Generate jobs'){
+            steps{
+                script{
+                    SuspendJob.suspend2()
+                }
             }
         }
     }
