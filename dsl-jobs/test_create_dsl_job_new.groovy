@@ -50,7 +50,7 @@ jobList.each{job_i->
 
                 source {
                     git {
-                        remote('https://github.com/' + stashProject + '/' + stashRepo)
+                        remote('git@github.com:ppoooolu/test-pipline.git')
                         credentialsId( stash_credentialsId )
                         traits {
                             gitBrowserSCMSourceTrait {
