@@ -21,6 +21,14 @@ jobList = [
                 folder:"SaaS"
         ],
         [
+                name:"lic_multi_jobs2",
+                description:"run multi jobs",
+                stashProject:"l4c",
+                stashRepo:"jenkins-shared-operations",
+                jenkinsfile_path:"workflow/deploy-tool/lic_multi_jobs.groovy",
+                folder:"SaaS"
+        ],
+        [
                 name:"lic_one_time_auth_demo",
                 description:"lic_one_time_auth_demo job",
                 stashProject:"l4c",
