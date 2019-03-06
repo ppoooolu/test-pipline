@@ -5,35 +5,11 @@ import javaposse.jobdsl.dsl.jobs.MultibranchWorkflowJob
 
 jobList = [
         [
-                name:"rds-monitor-deploy",
+                name:"test_env",
                 description:"rds-monitor-deploy multibranch job",
-                stashProject:"l4c",
-                stashRepo:"serverless-projects",
-                jenkinsfile_path:"rds-monitoring/Jenkinsfile",
-                folder:"SaaS"
-        ],
-        [
-                name:"lic_multi_jobs",
-                description:"run multi jobs",
-                stashProject:"l4c",
-                stashRepo:"jenkins-shared-operations",
-                jenkinsfile_path:"workflow/deploy-tool/lic_multi_jobs.groovy",
-                folder:"SaaS"
-        ],
-        [
-                name:"lic_multi_jobs2",
-                description:"run multi jobs",
-                stashProject:"l4c",
-                stashRepo:"jenkins-shared-operations",
-                jenkinsfile_path:"workflow/deploy-tool/lic_multi_jobs.groovy",
-                folder:"SaaS"
-        ],
-        [
-                name:"lic_one_time_auth_demo",
-                description:"lic_one_time_auth_demo job",
-                stashProject:"l4c",
-                stashRepo:"jenkins-shared-operations",
-                jenkinsfile_path:"workflow/login/Jenkinsfile-one-time-auth.groovy",
+                stashProject:"ppoooolu",
+                stashRepo:"test-pipline.git",
+                jenkinsfile_path:"flows/env_test/env_test.groovy",
                 folder:"SaaS"
         ]
 //        ,
@@ -73,7 +49,7 @@ jobList.each{job_i->
             branchSource {
                 source {
                     git {
-                        remote('ssh://git@stash.bbpd.io/' + stashProject + '/' + stashRepo)
+                        remote('https://github.com/' + stashProject + '/' + stashRepo)
                         credentialsId(stash_credentialsId)
                         includes(includes_branch)
                         excludes(excludes_branch)
