@@ -47,12 +47,23 @@ jobList.each{job_i->
         description(job_description)
         branchSources {
             branchSource {
+
                 source {
                     git {
                         remote('https://github.com/' + stashProject + '/' + stashRepo)
-                        credentialsId(stash_credentialsId)
-                        includes(includes_branch)
-                        excludes(excludes_branch)
+                        credentialsId( stash_credentialsId )
+                        traits {
+                            gitBrowserSCMSourceTrait {
+                                browser {
+                                    stash {
+                                        repoUrl( 'https://github.com/' + stashProject + '/' + stashRepo)
+                                    }
+                                }
+                            }
+                            pruneStaleBranchTrait()
+                            branchDiscoveryTrait()
+                            ignoreOnPushNotificationTrait()
+                        }
                     }
                 }
 
@@ -63,6 +74,7 @@ jobList.each{job_i->
                         }
                     }
                 }
+
             }
         }
 
