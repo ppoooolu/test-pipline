@@ -20,12 +20,12 @@ pipeline {
             }
         }
 
-        stage('Suspend jobs'){
-            steps{
-                script{
-                    SuspendJob.suspend2()
-                }
-            }
-        }
+//        stage('Suspend jobs'){
+//            steps{
+//                script{
+//                    SuspendJob.suspend2()
+//                }
+//            }
+//        }
     }
 }
