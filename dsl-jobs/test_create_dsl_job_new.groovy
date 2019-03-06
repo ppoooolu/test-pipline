@@ -60,6 +60,8 @@ jobList.each { job_i ->
                     git {
                         remote('https://github.com/' + stashProject + '/' + stashRepo)
                         credentialsId(stash_credentialsId)
+                        includes(includes_branch)
+                        excludes(excludes_branch)
 //                        traits {
 //                            gitBrowserSCMSourceTrait {
 //                                browser {
