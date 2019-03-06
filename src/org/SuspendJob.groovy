@@ -31,9 +31,11 @@ class SuspendJob {
         for (job_name in BBops_Suspend_Job_list) {
             for (f in Jenkins.instance.getItemByFullName(job_name)) {
 //        for (f in  Jenkins.instance.getItemMap()['test_env','test_env2']){
-//            if (f.parent instanceof jenkins.branch.OrganizationFolder) {
-//                continue;
-//            }
+            if (f.parent instanceof jenkins.branch.OrganizationFolder) {
+                def scan = jenkins.branch.OrganizationFolder.OrganizationScan(f.parent)
+                f.scan()
+                continue;
+            }
                 for (s in f.sources) {
                     def prop = new jenkins.branch.NoTriggerBranchProperty();
                     def propList = [prop] as jenkins.branch.BranchProperty[];
