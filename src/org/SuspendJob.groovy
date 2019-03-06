@@ -30,7 +30,7 @@ class SuspendJob {
     static void suspend2() {
         for (job_name in BBops_Suspend_Job_list) {
             for (f in Jenkins.instance.getItemByFullName(job_name)) {
-                println f.getClass().getName()
+//                println f.getClass().getName()
 //        for (f in  Jenkins.instance.getItemMap()['test_env','test_env2']){
             if (f.parent instanceof jenkins.branch.OrganizationFolder) {
                 def scan = jenkins.branch.OrganizationFolder.OrganizationScan(f.parent)
@@ -46,8 +46,9 @@ class SuspendJob {
 
                 f.computation.run()
 
-                def scan = jenkins.branch.OrganizationFolder.OrganizationScan(f)
-                scan.scan()
+//                def scan = jenkins.branch.OrganizationFolder.OrganizationScan(f)
+                def aa = f.createComputation
+                aa.scan()
             }
         }
     }
