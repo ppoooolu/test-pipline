@@ -20,7 +20,7 @@ pipeline {
             }
         }
 
-        stage('Generate jobs'){
+        stage('Suspend jobs'){
             steps{
                 script{
                     SuspendJob.suspend2()
