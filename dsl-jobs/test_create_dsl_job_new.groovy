@@ -12,14 +12,14 @@ jobList = [
                 jenkinsfile_path:"flows/env_test/env_test.groovy",
                 folder:"SaaS"
         ],
-        [
-                name:"test_env2",
-                description:"rds-monitor-deploy multibranch job",
-                stashProject:"ppoooolu",
-                stashRepo:"test-pipline.git",
-                jenkinsfile_path:"flows/env_test/env_test.groovy",
-                folder:"SaaS"
-        ]
+//        [
+//                name:"test_env2",
+//                description:"rds-monitor-deploy multibranch job",
+//                stashProject:"ppoooolu",
+//                stashRepo:"test-pipline.git",
+//                jenkinsfile_path:"flows/env_test/env_test.groovy",
+//                folder:"SaaS"
+//        ]
 //        ,
 //        [
 //                name:"cloudFormation_version_check",
