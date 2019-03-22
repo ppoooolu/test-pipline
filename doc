@@ -7,5 +7,3 @@ staticMethod groovy.json.JsonOutput toJson java.lang.Object
 -Dpermissive-script-security.enabled=true
 
 So you jenkins.xml will look something like this:
-
-test
