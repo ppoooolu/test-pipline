@@ -1,4 +1,5 @@
 @Library('my-lib') pipelineLibrary
+import groovy.text.SimpleTemplateEngine
 
 pipeline {
     agent any
