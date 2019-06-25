@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     def run_script = renderTemplete()
-                    echo run_script
+                    sh run_script
                 }
             }
         }
