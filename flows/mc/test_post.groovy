@@ -4,3 +4,11 @@ KKKKKK {
     aaaa: 'xxxx'
 """
 }
+
+post {
+    always {
+        script{
+            echo 'ddddddd'
+        }
+    }
+}
