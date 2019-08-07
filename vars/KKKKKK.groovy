@@ -1,10 +1,6 @@
 def call(body){
     stage('aaaa'){
-        steps{
-            script{
-                echo 'aaaaaaaaaaa'
-            }
-        }
+        echo 'aaaaaaaaaaa'
     }
     post {
         always {
