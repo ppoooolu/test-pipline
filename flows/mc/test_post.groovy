@@ -5,10 +5,14 @@ KKKKKK {
 """
 }
 
-post {
-    always {
-        script{
-            echo 'ddddddd'
+pipeline {
+    agent any
+
+    post {
+        always {
+            script{
+                echo 'ddddddd'
+            }
         }
     }
 }
