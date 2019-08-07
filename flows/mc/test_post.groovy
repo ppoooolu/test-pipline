@@ -1,4 +1,4 @@
-@Library('mylib') mylib
+@Library('my-lib') mylib
 KKKKKK {
     yml="""
     aaaa: 'xxxx'
